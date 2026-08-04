@@ -1,8 +1,47 @@
 # The Nexus
 
-**Version 3.2** — Scope & Aspiration Edition. An immersive RPG engine powered by AI — your Game Master for genre-flexible, consequence-driven adventures across Claude, ChatGPT, and Gemini.
+**Version 3.4** — Compiled Edition. An immersive RPG engine powered by AI — your Game Master for genre-flexible, consequence-driven adventures across Claude, ChatGPT, and Gemini.
 
-## What's New in 3.2
+## What's New in 3.4
+
+### The Agency Gate (Priority 0)
+- **Final Gate**: PLAYER AGENCY restated as an enforceable pre-output check at the end of the document, where it is read last before generation — it overrides every other section, including prose calibration and scene tension
+- **One-Action Ceiling**: At most one PC action per response, and only one the player explicitly stated
+- **The Negation Trap**: "You don't linger / you do not raise a hand" named as a violation class — writing what the PC declines is writing what the PC does
+- **The Interiority Line**: Senses may receive; the mind may not conclude. Sensory input is permitted, interpretation and verdict are not
+- **PC Memory Is Player Property**: Canon backstory goes into the world as a trigger, never narrated as the PC recalling it
+- **Pre-Output Gate**: A four-question scan run on every response, no scene types exempt
+
+### Machinery Containment
+- **Banned Machinery Leak**: The framework's own vocabulary — tension axis labels, engine and amendment names, structural and mechanical terms — is barred from narration and dialogue
+- **Craft Vocabulary Ban**: Prose-calibration anchors instruct the Nexus and are not facts about the world; no author, genre, or stylistic mode may be named inside the fiction
+- **The Audibility Test**: If a sentence only parses to someone holding the framework, it gets cut
+- **Header Carve-Out**: `[NEXUS SYSTEM]` blocks and Export State remain the designated out-of-world channel and *should* name axes, clocks, and DCs precisely
+
+### Difficulty Band Repair
+- **Full Fixed Scale**: Trivial (5), Easy (10), Moderate (15), Hard (20), Formidable (25), Legendary (30) — replaces the previous three-label scale that left most Legend-tier checks unnamed
+- **Inheritance Rule**: Intermediate DCs take the band at or below them (DC 17 is Moderate, DC 22 is Hard)
+- **No Relabeling for Drama**: The label follows the number, never the tension of the moment
+
+### Amendments 2.0–2.10
+- **The Repertory Principle**: Cast economy — richness accrues through recurrence, not novelty
+- **Reputation Distortion Engine**: The world reacts to the story told, not the fact
+- **Faction Clocks**: Organizations as NPCs at scale, with inheritor ranking
+- **Motif Registry**: Image systems that repeat on purpose
+- **Planted Gun Registry**: Foreshadowing audit with payoff horizons
+- **Location Arcs**: Places age and wear as cast members
+- **Interlude Protocol**: Sanctioned dramatic irony — opt-in NPC-perspective scenes
+- **Diegetic Recap**: Re-immersion over re-information
+- **Living Speech Lexicon**: Curses, blessings, and idiom per culture
+- **The World's Clock**: Continuity of sky — hour, weather, season
+- **Series Finale Protocol**: Endless by default, endable by player invocation only
+
+### Compilation
+- Fully self-contained — sections formerly carried by reference from v3.0 are now inlined
+- Sections marked `[RESTORED]` (original pre-3.0 wording) or `[RECONSTRUCTED]` (rebuilt from internal evidence)
+- Deduplication and cross-reference repairs throughout
+
+## What Was New in 3.2
 
 ### Narrative Scope System
 - **Narrative Scope per Tier**: Each tier defines scope boundaries (Personal→Local, Local→Regional, Regional→Galactic, Galactic→Mythic)
@@ -124,10 +163,10 @@
 ## Features
 
 ### Core System
-- **Nexus Framework v3.2**: Complete RPG system with tiered character creation, narrative scope enforcement, aspiration tracking, organic specialization, and refined storytelling mechanics
+- **Nexus Framework v3.4**: Complete RPG system with tiered character creation, narrative scope enforcement, aspiration tracking, organic specialization, and refined storytelling mechanics
 - **13 World States**: Dystopian, Utopian, Frontier, Balanced, Chaos, Decadent, Occupied, Gilded, Liminal, Enclave, Noir, Dying, Mythic — each with Information, Currency, Justice, and Mobility profiles
 - **Dynamic State Shifts**: World states blend, shift, and rupture based on your actions
-- **Player Agency Protection**: Multiple redundant safeguards prevent AI from narrating your character's actions
+- **Player Agency Protection**: Multiple redundant safeguards prevent AI from narrating your character's actions, terminating in a Priority 0 pre-output gate that overrides every other rule in the framework
 - **Conditioned Response Engine**: NPCs react based on accumulated emotional/physical context, not just immediate stimulus
 
 ### Technical Features
@@ -136,7 +175,7 @@
 - **Character Sheet Continuity**: Persistent tracking with rolling summary consolidation
 - **Character Sheet Editor**: Real-time editing via 📋 button in web UI
 - **Save/Load Sessions**: Pick up any campaign where you left off
-- **Model Selection**: Claude Opus 4.7, Opus 4.6, Opus 4.5, Sonnet 4.6, Sonnet 4.5, Haiku 4.5
+- **Model Selection**: Claude Opus 5, Sonnet 5, Opus 4.8, Opus 4.7, Sonnet 4.6, Haiku 4.5
 - **Multi-Provider Support**: Anthropic Claude, Google Gemini (up to 3.1 Pro), and OpenAI (GPT-5.2, GPT-5 Mini, GPT-4o)
 - **Temperature Control**: Dial creativity up for wild sessions, down for consistency
 - **Mobile Server**: Play on your phone while running locally on desktop
@@ -200,7 +239,7 @@ Type `Begin` to start a new session. The Nexus will guide you through:
 | 4 | **Legend** | 45 points | -2 to +9 | Cold Open + Legacy Complication | Galactic | Jedi Master, Sith Lord, galactic crime boss |
 
 ### Tier-Adjusted Gameplay
-- **Difficulty**: DCs scale with tier (Tier 1: forgiving 10-15, Tier 4: legendary 18-25)
+- **Difficulty**: DCs scale with tier (Tier 1: Easy–Moderate 10-15, Tier 4: Hard–Formidable 18-25, with Legendary 30 reserved for arc-defining feats). Band labels are fixed to numbers and never shift to raise stakes
 - **Advancement**: Origin Arc characters level faster; Legends grow in depth, not numbers
 - **Skill Caps**: Tier 1 caps at +5 during Origin, rising to +7 after. Tier 3-4 cap at +9
 - **Narrative Scope**: Each tier operates at a specific scope level; scope expansion requires earned story progression
@@ -262,14 +301,16 @@ The consolidated sheet includes:
 
 ### Anthropic (Claude)
 
-| Model | Best For | Cost* |
-|-------|----------|------|
-| **Opus 4.7** | Latest, most advanced — for complex narratives and nuanced NPCs | ~$0.075/exchange |
-| **Opus 4.6** | High performance, complex reasoning | ~$0.075/exchange |
-| **Opus 4.5** | Solid all-around | ~$0.075/exchange |
-| **Sonnet 4.6** | **Recommended default.** Near-Opus quality at Sonnet pricing | ~$0.015/exchange |
-| **Sonnet 4.5** | Slightly cheaper on cached prompts | ~$0.015/exchange |
-| **Haiku 4.5** | Quick sessions, testing, budget-conscious | ~$0.002/exchange |
+| Model | Best For | Context | $/M in | $/M out |
+|-------|----------|--------:|-------:|--------:|
+| **Opus 5** | Maximum instruction adherence — the framework's rule hierarchy applied reliably under pressure | 1M | $5.00 | $25.00 |
+| **Sonnet 5** | **Recommended default.** Near-Opus adherence at Sonnet pricing | 1M | $3.00 | $15.00 |
+| **Opus 4.8** | Previous-generation Opus, strong long-horizon coherence | 1M | $5.00 | $25.00 |
+| **Opus 4.7** | Older Opus; adaptive thinking, high-resolution vision | 1M | $5.00 | $25.00 |
+| **Sonnet 4.6** | Older Sonnet, solid all-around | 1M | $3.00 | $15.00 |
+| **Haiku 4.5** | Summary generation and side tasks only — **not** for running the Nexus (see below) | 200K | $1.00 | $5.00 |
+
+**On Haiku 4.5:** it has a 200K context window and does not support the `effort` parameter. With the framework (~54K tokens) plus reference documents and a growing transcript, a real campaign session exceeds its window outright, and long-context selective rule adherence is the axis where the tier gap is widest. Use it for Quick summaries and side tasks; run the Nexus on Sonnet 5 or better.
 
 ### OpenAI (ChatGPT)
 
@@ -283,13 +324,20 @@ The consolidated sheet includes:
 
 ### Google AI (Gemini)
 
-| Model | Best For | Cost* |
-|-------|----------|------|
-| **Gemini 3.1 Pro** | Top-tier reasoning, long context | ~$0.010/exchange |
-| **Gemini 3 Pro** | Strong all-around performance | ~$0.010/exchange |
-| **Gemini 3 Flash** | Fast and cheap | ~$0.001/exchange |
+| Model | Best For | $/M in | $/M out |
+|-------|----------|-------:|--------:|
+| **Gemini 3.1 Pro** (≤200K prompt) | Top-tier reasoning, long context | $2.00 | $12.00 |
+| **Gemini 3.1 Pro** (>200K prompt) | Same model, long-context tier | $4.00 | $18.00 |
+| **Gemini 3 Pro** | Strong all-around performance | — | — |
+| **Gemini 3 Flash** | Fast and cheap | — | — |
 
-*Approximate costs based on typical exchange length (~500 tokens in, 800 tokens out)
+**Watch the 200K cliff.** Gemini 3.1 Pro doubles input price and raises output 50% once a prompt crosses 200K tokens. A Nexus session with the framework, a dossier, and sideloaded archives crosses it early and stays there — so the effective rate is the lower row, not the headline. Claude models have no long-context premium across their full 1M window.
+
+### Cost Note
+
+Per-exchange estimates are misleading for this framework. The dominant cost is the ~54K-token framework prefix re-sent on every turn, not the exchange itself — so **prompt caching is the single biggest lever on your bill**, worth more than the choice between Sonnet and Opus. Cached reads run ~0.1× input price on both Claude and Gemini. Verify caching is actually working before optimizing anything else.
+
+Token counts here are estimates. Use each provider's own token-counting endpoint against `framework.txt` for real numbers — cross-vendor token counts are not directly comparable, and third-party tokenizers (tiktoken and friends) are wrong for both Claude and Gemini.
 
 ## Temperature Guide
 
@@ -304,12 +352,15 @@ The Nexus respects player agency with multiple protections:
 
 - ✅ Stops after describing situations (never assumes PC actions)
 - ✅ Never narrates "you feel/think/decide" without player input
+- ✅ Never narrates what the PC *declines* to do — a refused option is still a decision
+- ✅ One PC action per response, maximum
 - ✅ Explicit checkpoints in combat and social scenes
 - ✅ Scope enforcement — stories stay at character tier scope level
-- ✅ Meta-language isolation — no game mechanics in narrative dialogue
+- ✅ Meta-language isolation — no game mechanics or engine vocabulary in narrative dialogue
 - ✅ Concrete examples of violations in framework
+- ✅ **Priority 0 Final Gate** — a per-response pre-output scan that outranks every other rule, placed last in the document so it is read immediately before generation
 
-If the AI ever railroads: **"Stop. You're narrating my character's actions. Let me decide."**
+If the AI ever railroads: **"Stop. You're narrating my character's actions. Let me decide."** The framework treats this as a hard override equivalent to "Nexus, Pause" — the Nexus must stop, acknowledge in a `[NEXUS SYSTEM]` header, and hand control back. Anything it wrongly narrated is reversible, and your version is canon.
 
 ## Mobile Server
 
@@ -323,7 +374,7 @@ If the AI ever railroads: **"Stop. You're narrating my character's actions. Let 
 ```
 nexus/
 ├── storyteller.py       # Desktop application
-├── framework.txt        # Nexus Framework v3.2
+├── framework.txt        # Nexus Framework v3.4 (single source of truth)
 ├── character_sheet.txt  # Persistent character data (rolling summary)
 ├── index.html           # Web version
 ├── nexus.html           # Mobile-optimized web version
@@ -333,7 +384,15 @@ nexus/
 
 ## Version History
 
-**v3.2** (Current) — Scope & Aspiration Edition
+**v3.4** (Current) — Compiled Edition
+- Priority 0 Agency Gate: one-action ceiling, negation trap, interiority line, PC-memory rule, per-response pre-output scan
+- Banned Machinery Leak: engine/axis/structural vocabulary and prose-calibration anchors barred from narration; `[NEXUS SYSTEM]` header carved out as the out-of-world channel
+- Difficulty bands rebuilt as a full fixed scale (Trivial 5 → Legendary 30) with an inheritance rule and a no-relabeling prohibition
+- Amendments 2.0–2.10: Repertory Principle, Reputation Distortion Engine, Faction Clocks, Motif Registry, Planted Gun Registry, Location Arcs, Interlude Protocol, Diegetic Recap, Living Speech Lexicon, The World's Clock, Series Finale Protocol
+- Fully self-contained compilation — v3.0 carry-by-reference sections inlined, marked `[RESTORED]` / `[RECONSTRUCTED]`
+- Deduplication and cross-reference repairs throughout
+
+**v3.2** — Scope & Aspiration Edition
 - Narrative Scope system: scope enforcement, tier-based scope levels, scope escalation rules
 - Authority Figure Problem + When the PC Defers (4-step chain-of-command protocol)
 - PC Aspiration Trajectory with milestone tracking and arc alignment
