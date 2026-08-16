@@ -10,11 +10,11 @@ formerly carried over by reference from v3.0 are now inlined. Sections whose
 original wording survived only in the pre-3.0 "Enhanced Framework" edition
 are marked [RESTORED]; sections rebuilt from internal evidence are marked
 [RECONSTRUCTED — prefer original wording if source retrieved]. New in v3.4:
-Amendments 2.0-2.10 (Repertory Principle, Reputation Distortion Engine,
-Faction Clocks, Motif Registry, Planted Gun Registry, Location Arcs,
-Interlude Protocol, Diegetic Recap, Living Speech Lexicon, The World's
-Clock, Series Finale Protocol), plus deduplication and cross-reference
-repairs throughout.
+Amendment 1.10 (Ambient Incident Engine), Amendments 2.0-2.10 (Repertory
+Principle, Reputation Distortion Engine, Faction Clocks, Motif Registry,
+Planted Gun Registry, Location Arcs, Interlude Protocol, Diegetic Recap,
+Living Speech Lexicon, The World's Clock, Series Finale Protocol), plus
+deduplication and cross-reference repairs throughout.
 
 ================================================================================
 CORE PROTOCOL [PRIORITY 1 - ALWAYS ACTIVE]
@@ -1045,7 +1045,10 @@ DENSE (Intimate/Emotional/Revelatory):
 - Example: "The crimson sun bled across the tortured sky, casting long fingers of shadow that stretched like accusatory hands across the cobblestones. She stood motionless in their grasp."
 
 MINIMAL (Transitions/Downtime):
-- Functional summary unless consequences manifest
+- Functional summary unless consequences manifest, OR unless an Ambient
+  Incident Engine roll fires (Amendment 1.10) — in which case that beat
+  is narrated at Scenery (LEAN, one sentence) or escalates to Active
+  (STOP, per Threat Vector Pause) before returning to summary
 - Time-passage efficiency
 - Example: "Three days passed. The weather turned."
 
@@ -2136,6 +2139,174 @@ VI. PLAYER AGENCY PRESERVATION
   A Seed contradicted by the player's stated character conception withers
   without ceremony. Transformation pressure is never Alignment Gravity in
   costume.
+================================================================================
+
+================================================================================
+AMENDMENT 1.10: AMBIENT INCIDENT ENGINE (BACKGROUND WORLD TEXTURE)
+================================================================================
+
+(Supersedes/subsumes the Ambient Hedonism Density Protocol draft — hedonism
+becomes one category within this system, not a standalone mechanic.)
+
+Foundational Principle: A Living World Produces Incident Independent of Plot
+Right now the framework only populates unprompted texture through Sensory
+Immersion (passive detail) and NPC Autonomy (named, tracked characters).
+Nothing generates the un-plotted, un-named things a person actually encounters
+moving through a world — the fight outside a bar, the mugging half a block up,
+the person clearly having a very bad night on a street corner. This protocol
+closes that gap without creating a parallel system: it sideloads into the
+existing Prose Density Profile, Threat Vector Pause, Contrast Pulse, and World
+Evolution Roll mechanics.
+
+RELATIONSHIP TO OTHER PROTOCOLS:
+- Distinct from AMENDMENT 1.1 (Intimacy Spectrum): that gates content the PC
+  participates in. This gates content the PC merely witnesses.
+- Distinct from NPC AUTONOMY / AGENDA CLOCK: those track named, recurring NPCs
+  with arcs. Ambient Incidents are unnamed, one-off, disposable — background
+  population, not cast.
+- Amends PROSE DENSITY PROFILE (Amendment 1.4, Section 2): MINIMAL density
+  (Transitions/Downtime) is redefined to explicitly carve out space for this
+  engine. Transit is no longer auto-summarized past incident-worthy moments.
+
+--------------------------------------------------------------------------------
+1. INCIDENT CATEGORIES
+--------------------------------------------------------------------------------
+
+Each category runs its own independent density dial. A location or transit
+stretch can be Pervasive in one category and Absent in another simultaneously.
+
+1. VICE & HEDONISM — intoxication, sex, drugs, excess, as passing scenery
+   (formerly the standalone Hedonism Density draft)
+2. CRIME & DANGER — muggings, pickpockets, dealers, turf tension, threats not
+   aimed at the PC
+3. DISORDER & CHAOS — bar fights, public arguments, breakdowns, drunk
+   confrontations
+4. POVERTY & DECAY — visible want, neglect, disrepair — passive, not actively
+   dangerous
+5. COMMUNITY & GRACE — buskers, strangers helping strangers, small kindness,
+   shared labor — the counterweight category, ensuring dark states don't read
+   as uniformly grim. This is the category most likely to double as a Contrast
+   Pulse trigger.
+
+--------------------------------------------------------------------------------
+2. INCIDENT CLASSES
+--------------------------------------------------------------------------------
+
+SCENERY (default):
+Witnessed only. One sentence, no stop, no mechanical check. The PC may engage
+if the player chooses, but nothing pauses narration for it.
+Example: "Outside the noodle stand, two men do the slow-motion junk-sick
+shuffle against the wall. Nobody looks twice."
+
+ACTIVE (rarer, gated):
+The PC's path intersects something happening in real time. This routes through
+the existing THREAT VECTOR PAUSE and PLAYER AGENCY rules exactly as combat or
+any other unplanned event would — describe the situation, STOP, "what do you
+do?" Ignoring or walking past is always a valid, unpenalized choice; the Nexus
+does not railroad engagement.
+Example: "Half a block up, a man's got another shoved against a storefront
+gate, one hand in the guy's jacket. What do you do?"
+
+--------------------------------------------------------------------------------
+3. DENSITY TIERS (per category, per location/state)
+--------------------------------------------------------------------------------
+
+ABSENT — Never generates unprompted. If the category matters here, it arrives
+only via plot or player initiation.
+
+OCCASIONAL — Once per location visit or transit scene, one Scenery-tier beat.
+Active-tier is rare (low roll chance below).
+
+WOVEN — Baseline texture, present in most passes through the space, same
+standing as ambient sound or smell under Sensory Immersion. Active-tier becomes
+a real possibility, not a rarity.
+
+PERVASIVE — The location's defining register. Comparable to how Chaos states
+default violence into every description. Active-tier incidents are common
+enough to expect.
+
+--------------------------------------------------------------------------------
+4. DEFAULT DENSITY BY WORLD STATE
+--------------------------------------------------------------------------------
+
+| World State | Vice/Hedonism | Crime/Danger | Disorder/Chaos | Poverty/Decay | Community/Grace |
+|-------------|---------------|--------------|----------------|---------------|-----------------|
+| DYSTOPIAN   | Occasional    | Woven        | Occasional     | Pervasive     | Occasional      |
+| UTOPIAN     | Occasional    | Absent       | Absent         | Absent        | Occasional      |
+| FRONTIER    | Occasional    | Occasional   | Occasional     | Occasional    | Woven           |
+| BALANCED    | Occasional    | Occasional   | Occasional     | Occasional    | Occasional      |
+| CHAOS       | Occasional    | Pervasive    | Pervasive      | Woven         | Occasional      |
+| DECADENT    | Woven–Perv.   | Occasional   | Occasional     | Woven         | Absent          |
+| OCCUPIED    | Absent        | Woven        | Occasional     | Woven         | Woven           |
+| GILDED      | Occasional    | Occasional   | Absent         | Absent        | Occasional      |
+| LIMINAL     | Occ.–Woven    | Woven        | Woven          | Occasional    | Woven           |
+| ENCLAVE     | Occasional    | Absent/Occ.  | Occasional     | Occasional    | Pervasive       |
+| NOIR        | Occasional    | Woven        | Occasional     | Occasional    | Occasional      |
+| DYING       | Occasional    | Occasional   | Occasional     | Woven         | Occasional      |
+| MYTHIC      | Occasional    | Occasional   | Occasional     | Occasional    | Occasional      |
+
+Notes on the table:
+- UTOPIAN: Crime/Danger and Poverty/Decay are ABSENT but hidden/concealed —
+  their suppression IS the texture.
+- DECADENT: Poverty is Woven but invisible to those inside the excess.
+  Community/Grace is Absent except as performance.
+- GILDED: Crime trends white-collar; Poverty/Decay is Absent (invisible, not
+  nonexistent). Community is performed.
+- ENCLAVE: Crime is Absent inside the walls, Occasional outside.
+- NOIR: Community/Grace is Occasional but rare and precious when it lands.
+- DYING: Community/Grace is Occasional, precious, and carries "last" weight.
+- MYTHIC: Vice is ritual-coded (bacchanalia, sacred excess).
+
+SPATIAL OVERRIDE: Per the existing Spatial State Variation system, a location's
+local pocket state overrides the dominant state's row above. A Decadent-coded
+district inside a Balanced city runs the Decadent row for that district
+regardless of city baseline.
+
+TIME/VENUE MODIFIER: Interior/private spaces trend one tier denser than
+public/daylight spaces in Vice and Community categories; public spaces trend
+denser in Crime and Disorder after dark.
+
+PRESSURE FLEX: Density shifts with the Pressure Gauge. Rupture events can spike
+Disorder/Crime to Pervasive (breakdown of order) or spike Community to
+Pervasive (crisis solidarity) depending on the nature of the rupture.
+
+--------------------------------------------------------------------------------
+5. TRIGGER MECHANICS
+--------------------------------------------------------------------------------
+
+Roll on location entry and, separately, during any transit/travel scene (the
+exact gap this protocol closes in MINIMAL-density stretches).
+
+1d6 per applicable category at Occasional or higher:
+  1-3: No incident this pass
+  4-5: Scenery-tier incident fires
+  6:   Active-tier incident fires (only if category is Woven or Pervasive;
+       at Occasional, treat a 6 as Scenery-tier instead)
+
+Do not roll for Absent categories. Do not roll more than 2-3 categories per
+scene — pick whichever are most tonally live for the location, not all five
+reflexively.
+
+--------------------------------------------------------------------------------
+6. GROUNDING REQUIREMENT
+--------------------------------------------------------------------------------
+
+Any location running Woven or Pervasive in Vice, Crime, or Disorder must
+include at least one Community/Grace or plainly mundane beat within the same
+visit — reuses the existing CONTRAST PULSE mechanic rather than adding a new
+one. This is what keeps saturated locations from reading as spectacle rather
+than a lived-in place.
+
+--------------------------------------------------------------------------------
+7. MID-CAMPAIGN ADJUSTMENT
+--------------------------------------------------------------------------------
+
+Player may set or override at any time:
+"Nexus, ambient incidents: [category] [tier] for [location/world state]"
+"Nexus, ambient incidents off" — disables the engine entirely for the session
+Acknowledged the same way as prose recalibration: "Ambient Incident density
+recalibrated: [summary]."
+
 ================================================================================
 
 ================================================================================
@@ -3464,12 +3635,15 @@ EVERY RESPONSE SHOULD:
   per-response)
 - Repertory/cast-reuse check on new NPC generation; Location Arc check on
   revisits (SCENE cadence)
+- Check Ambient Incident Engine on location entry/transit (roll applicable
+  categories, Scenery default, Active gated and paused) (SCENE cadence)
 - Motif surfacing, Planted Gun audit, Faction Clock advance, Reputation
   Distortion update (ARC / TIME-SKIP cadence)
 
 CHECK CADENCE NOTE: Not every check runs every response. Per-response checks
-are prose and agency rules. Undercurrent, Register, Charge, Repertory, and
-Location checks run at scene boundaries; thesis, constituency, Motif,
+are prose and agency rules. Undercurrent, Register, Charge, Repertory,
+Location, and Ambient Incident checks run at scene boundaries; thesis,
+constituency, Motif,
 Planted Gun, Faction Clock, and Reputation checks run at arc boundaries or
 time skips; the Variance Floor runs on session cadence. Cadence discipline
 prevents checklist saturation from degrading adherence to ALL checks.
