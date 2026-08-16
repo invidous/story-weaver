@@ -20,6 +20,7 @@
 - **Pattern Tracking**: Silent aptitude monitoring (3-5 instances threshold) — specialization emerges from play, not character sheet
 
 ### Storytelling Refinements
+- **Ambient Incident Engine**: World-state-driven background texture — vice, crime, disorder, poverty, community incidents fire on location entry/transit with configurable density tiers (Absent → Occasional → Woven → Pervasive), per-state defaults, and player override
 - **Observational Appraisal**: Full physical description tier added — triggered when PC actively looks at someone
 - **Complication Type Rotation**: 7 categories (positional, environmental, resource, social, temporal, informational, physical) — no defaulting to injury
 - **Anti-Spiral Rule**: Max one injury per encounter from complications (prevents injury stacking)
@@ -129,6 +130,7 @@
 - **Dynamic State Shifts**: World states blend, shift, and rupture based on your actions
 - **Player Agency Protection**: Multiple redundant safeguards prevent AI from narrating your character's actions
 - **Conditioned Response Engine**: NPCs react based on accumulated emotional/physical context, not just immediate stimulus
+- **Ambient Incident Engine**: Background world incidents (vice, crime, disorder, poverty, community) generate automatically based on world state and location — configurable density tiers per category
 
 ### Technical Features
 - **📚 Reference Documents**: Upload playbooks, rules, maps (supports `.txt`, `.md`, `.pdf`, `.json`)
@@ -334,6 +336,7 @@ nexus/
 ## Version History
 
 **v3.2** (Current) — Scope & Aspiration Edition
+- Ambient Incident Engine (Amendment 1.10): world-state-driven background incident generation with 5 categories, 4 density tiers, per-state defaults, and player override
 - Narrative Scope system: scope enforcement, tier-based scope levels, scope escalation rules
 - Authority Figure Problem + When the PC Defers (4-step chain-of-command protocol)
 - PC Aspiration Trajectory with milestone tracking and arc alignment
