@@ -1,8 +1,27 @@
 # The Nexus
 
-**Version 3.2** — Scope & Aspiration Edition. An immersive RPG engine powered by AI — your Game Master for genre-flexible, consequence-driven adventures across Claude, ChatGPT, and Gemini.
+**Version 3.4** — Compiled Edition. An immersive RPG engine powered by AI — your Game Master for genre-flexible, consequence-driven adventures across Claude, ChatGPT, and Gemini.
 
-## What's New in 3.2
+## What's New in 3.4
+
+### Compiled Edition
+- **Fully self-contained**: All sections formerly carried over by reference from v3.0 are now inlined; restored and reconstructed sections marked throughout
+- **Ambient Incident Engine** (Amendment 1.10): World-state-driven background texture — vice, crime, disorder, poverty, community incidents fire on location entry/transit with configurable density tiers (Absent → Occasional → Woven → Pervasive), per-state defaults, and player override
+
+### New Amendments (2.0–2.10)
+- **Repertory Principle** (2.0): Cast economy — reuse established NPCs before generating new ones; soft cap of 3-5 new significant NPCs per arc
+- **Reputation Distortion Engine** (2.1): Dual-ledger system — what actually happened vs. what the world believes, distorted by each state's Information profile
+- **Faction Clocks** (2.2): Organizations as NPCs at scale — slow clocks with 4-8 segments, fault-line coupling, vacuum inheritance
+- **Motif Registry** (2.3): 2-3 concrete recurring images per campaign, surfaced at escalating significance, never decoded
+- **Planted Gun Registry** (2.4): Foreshadowing audit — every deliberate setup logged with payoff horizon, audited at arc resolution
+- **Location Arcs** (2.5): Recurring locations gain tension axes, pressure response, and wear — places age alongside the cast
+- **Interlude Protocol** (2.6): Opt-in NPC perspective scenes for dramatic irony, with hard limits on what they may reveal
+- **Diegetic Recap** (2.7): In-fiction "previously..." delivered in the world's own voice via the active state's Information profile
+- **Living Speech Lexicon** (2.8): Per-culture curses, blessings, idioms, and taboo expressions — culture is audible before it's explained
+- **The World's Clock** (2.9): Persistent hour, weather, and season tracking with pathetic-fallacy governor
+- **Series Finale Protocol** (2.10): Player-invoked earned ending — registries pay off, cast lands, the world inherits what remains
+
+## What Was New in 3.2
 
 ### Narrative Scope System
 - **Narrative Scope per Tier**: Each tier defines scope boundaries (Personal→Local, Local→Regional, Regional→Galactic, Galactic→Mythic)
@@ -20,7 +39,6 @@
 - **Pattern Tracking**: Silent aptitude monitoring (3-5 instances threshold) — specialization emerges from play, not character sheet
 
 ### Storytelling Refinements
-- **Ambient Incident Engine**: World-state-driven background texture — vice, crime, disorder, poverty, community incidents fire on location entry/transit with configurable density tiers (Absent → Occasional → Woven → Pervasive), per-state defaults, and player override
 - **Observational Appraisal**: Full physical description tier added — triggered when PC actively looks at someone
 - **Complication Type Rotation**: 7 categories (positional, environmental, resource, social, temporal, informational, physical) — no defaulting to injury
 - **Anti-Spiral Rule**: Max one injury per encounter from complications (prevents injury stacking)
@@ -125,7 +143,7 @@
 ## Features
 
 ### Core System
-- **Nexus Framework v3.2**: Complete RPG system with tiered character creation, narrative scope enforcement, aspiration tracking, organic specialization, and refined storytelling mechanics
+- **Nexus Framework v3.4**: Complete RPG system with tiered character creation, narrative scope enforcement, aspiration tracking, organic specialization, and refined storytelling mechanics
 - **13 World States**: Dystopian, Utopian, Frontier, Balanced, Chaos, Decadent, Occupied, Gilded, Liminal, Enclave, Noir, Dying, Mythic — each with Information, Currency, Justice, and Mobility profiles
 - **Dynamic State Shifts**: World states blend, shift, and rupture based on your actions
 - **Player Agency Protection**: Multiple redundant safeguards prevent AI from narrating your character's actions
@@ -325,7 +343,7 @@ If the AI ever railroads: **"Stop. You're narrating my character's actions. Let 
 ```
 nexus/
 ├── storyteller.py       # Desktop application
-├── framework.txt        # Nexus Framework v3.2
+├── framework.txt        # Nexus Framework v3.4
 ├── character_sheet.txt  # Persistent character data (rolling summary)
 ├── index.html           # Web version
 ├── nexus.html           # Mobile-optimized web version
@@ -335,8 +353,13 @@ nexus/
 
 ## Version History
 
-**v3.2** (Current) — Scope & Aspiration Edition
+**v3.4** (Current) — Compiled Edition
+- Fully self-contained: all sections inlined, restored, or reconstructed
 - Ambient Incident Engine (Amendment 1.10): world-state-driven background incident generation with 5 categories, 4 density tiers, per-state defaults, and player override
+- Amendments 2.0–2.10: Repertory Principle, Reputation Distortion Engine, Faction Clocks, Motif Registry, Planted Gun Registry, Location Arcs, Interlude Protocol, Diegetic Recap, Living Speech Lexicon, The World's Clock, Series Finale Protocol
+- Deduplication and cross-reference repairs throughout
+
+**v3.2** — Scope & Aspiration Edition
 - Narrative Scope system: scope enforcement, tier-based scope levels, scope escalation rules
 - Authority Figure Problem + When the PC Defers (4-step chain-of-command protocol)
 - PC Aspiration Trajectory with milestone tracking and arc alignment
