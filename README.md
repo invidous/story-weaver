@@ -1,8 +1,55 @@
 # The Nexus
 
-**Version 3.4** — Compiled Edition. An immersive RPG engine powered by AI — your Game Master for genre-flexible, consequence-driven adventures across Claude, ChatGPT, and Gemini.
+**Version 3.5** — Integrity Edition. An immersive RPG engine powered by AI — your Game Master for genre-flexible, consequence-driven adventures across Claude, ChatGPT, and Gemini.
 
-## What's New in 3.4
+## What's New in 3.5
+
+### Integrity Edition — More Trustworthy Machinery
+
+Version 3.4 was narratively comprehensive. Version 3.5 improves integrity across the systems already present — deciding which rule governs, whose truth is being represented, why an event happened, and what a roll genuinely earned.
+
+### Structural Additions
+- **Nexus Constitution**: 13 hard invariants that no amendment, calibration, or genre convention overrides — the bedrock of the entire system
+- **Protocol Arbitration Layer**: Explicit 7-level conflict hierarchy for resolving competing mandates (player instruction > agency/consent > canon > mechanical result > character integrity > pacing > prose)
+- **Epistemic State Engine**: Tracks who knows what, how they learned it, and how strongly they believe it — 7 proposition classes (Truth, Observation, Claim, Belief, Rumor, Lie, Unknown) prevent accidental omniscience and mystery leakage
+- **Decision Integrity Protocol**: Establishes Intent, Approach, and Known Stakes before consequential rolls — no reinterpreting intent after the fact, no untelegraphed risks, no moving goalposts
+- **Canon and Divergence Protocol**: Formal support for established fictional universes — continuity, era, authority order, spoiler horizon, canon elasticity, and a tracked Divergence Ledger
+- **Investigation and Mystery Architecture**: Private Truth Maps, three independently accessible clue routes per inference, fair-play rules for evidence and deduction
+- **NPC-to-NPC Social Graph**: Lateral NPC relationships (friendship, rivalry, obligation, mentorship, etc.) that develop off-screen — the cast becomes an ensemble, not satellites
+- **Activation Map**: Authoritative cadence routing — which modules fire per-response, at scene boundaries, at session cadence, at arc/time-skip cadence, or at setup
+
+### Amendment 1.7 Rewrite — Writing Women
+- Complete replacement of the primarily preventative Part A with a positive character-generation architecture
+- **Three-Part Character Test**: Personhood, Situatedness, and Population tests replace the simple Swap Test
+- **Positive Interiority Fields**: 7 mandatory fields for significant women (Private Want, Appetite, Self-Concept, Blind Spot, Unglamorous Trait, Social Tether, Unobserved Life)
+- **Right to Be Unexemplary**: 12 explicit permissions for women to be mediocre, selfish, wrong, cruel, etc. without representational burden
+- **Archetype-Bundle Detection**: 7 named bundles to watch for (Prestige Woman, Quiet Steel, Group Mother, Defiant Survivor, Chaotic Spark, Elegant Predator, Earnest Innocent)
+- **Gender Ecology**: 9-axis cultural gender system established silently per major culture
+- **Female Social Worlds**: Lateral female-to-female relationships required at population level
+- **Desire Ownership**: Women's romantic and sexual interiority exists independently of the PC
+- **Narrative Labor Ledger**: Population-level tracking of who performs emotional, domestic, and strategic labor
+- **Appearance and Self-Presentation**: 5-layer model (Body, Presentation, Social Reading, PC Attention, Narrative Judgment)
+- **Voice and Affect Range**: Full distribution available; audit for softening-construction convergence
+- **Competence Has Texture**: Competence shown through preparation and technique, not narrator praise
+- Part B (Writing Antagonists) preserved intact with all existing rules
+
+### Repairs to Existing Systems
+- **Outcome Geometry**: Fixed Fail 1-4 contradiction — marginal failure now consistently means "goal not achieved, but forward motion emerges" (was contradictorily both failure and success)
+- **Embodied Agency Protocol**: PC involuntary reactions constrained to established injuries, accepted conditions, or player-authored patterns — somatic information is input, not interpretation
+- **Skill Ontology**: Clarified that Physical/Mental/Social/Survival/Specialist are categories containing separately scored subskills, not five scores
+- **Advancement Formula**: Fixed cancellation bug (1d20+skill vs DC 15+skill = 1d20 vs 15) — corrected to flat 1d20 vs DC with defined critical success/failure
+- **Tier-Adjusted DCs**: Difficulty follows the task, not the PC's tier — tier determines which challenges enter the story, not the intrinsic difficulty of an unchanged task
+- **Blast-Radius Test**: Replaces automatic Resolution Rupture — arc resolutions now produce proportional consequences (Personal/Local/Institutional/Regional/Civilizational)
+- **NPC State Stance**: Replaces automatic state allegiance — NPCs hold stances toward the prevailing world state (beneficiary/adapter/reformer/resister/exile/indifferent/misdiagnoses)
+- **Slow-Burn NPC Initiative**: Configurable campaign preference (Reserved/Organic/Assertive) resolves conflict between discharge prohibition and NPC autonomy
+- **Relationship Roll Limits**: Persuasion cannot create genuine feeling — rolls govern expression, not existence of attraction/trust/consent
+- **Planted Gun Reverse Audit**: No counterfeiting foreshadowing in scenes already played — delay, reduce, reframe, or reinterpret only if original wording supports it
+- **Scene Tension Curve**: Replaced "entry ≠ exit tension" with vector-based rule — at least one of knowledge/position/relationship/resource/commitment/danger/time/world-state must move
+- **Ambient Incident Dignity**: Poverty, addiction, sex work, and disorder are not atmospheric props — even unnamed people behave as people with aims, boundaries, and context
+- **Prose Rules**: Prefer said/asked over thesaurus tagging; three-sense immersion at scene establishment only (not every response); noticeable-repetition check replaces absolute ban; decomposed technique profiles for style anchors
+- **Cool-Down Causality**: Cool-Down cannot freeze imminent physical processes — explosions, medical emergencies, and pursuit continue according to world logic
+
+## What Was New in 3.4
 
 ### Compiled Edition
 - **Fully self-contained**: All sections formerly carried over by reference from v3.0 are now inlined; restored and reconstructed sections marked throughout
@@ -122,7 +169,7 @@
 - **Story Spine Tracking**: Every scene connects through status quo → disruption → choice → new status quo
 - **Dramatic Question Engine**: Each arc has a core question shaping choices, NPC behavior, and resolution
 - **Thematic Thread Registration**: Emergent themes woven into environment, dialogue, and choice framing
-- **Scene Tension Curve**: Every scene must move — entry tension ≠ exit tension
+- **Scene Tension Curve**: Every scene must move — at least one tracked vector changes (v3.5: vector-based rule)
 - **Breath Protocol**: Mandated quiet beats after 2-3 high-tension scenes
 - **Contrast Pulse**: Strategic prose style breaks every 5-7 responses for human-feeling narration
 
@@ -143,7 +190,7 @@
 ## Features
 
 ### Core System
-- **Nexus Framework v3.4**: Complete RPG system with tiered character creation, narrative scope enforcement, aspiration tracking, organic specialization, and refined storytelling mechanics
+- **Nexus Framework v3.5**: Complete RPG system with tiered character creation, narrative scope enforcement, aspiration tracking, organic specialization, protocol arbitration, epistemic tracking, decision integrity, and refined storytelling mechanics
 - **13 World States**: Dystopian, Utopian, Frontier, Balanced, Chaos, Decadent, Occupied, Gilded, Liminal, Enclave, Noir, Dying, Mythic — each with Information, Currency, Justice, and Mobility profiles
 - **Dynamic State Shifts**: World states blend, shift, and rupture based on your actions
 - **Player Agency Protection**: Multiple redundant safeguards prevent AI from narrating your character's actions
@@ -220,9 +267,9 @@ Type `Begin` to start a new session. The Nexus will guide you through:
 | 4 | **Legend** | 45 points | -2 to +9 | Cold Open + Legacy Complication | Galactic | Jedi Master, Sith Lord, galactic crime boss |
 
 ### Tier-Adjusted Gameplay
-- **Difficulty**: DCs scale with tier (Tier 1: forgiving 10-15, Tier 4: legendary 18-25)
-- **Advancement**: Origin Arc characters level faster; Legends grow in depth, not numbers
-- **Skill Caps**: Tier 1 caps at +5 during Origin, rising to +7 after. Tier 3-4 cap at +9
+- **Difficulty**: DCs follow the task, not the tier — tier determines which challenges enter the story, not the intrinsic difficulty of unchanged tasks (Standard: 10 Easy, 15 Moderate, 20 Hard, 25 Extreme)
+- **Advancement**: Flat 1d20 vs DC (12/15/18 by tier) — Origin Arc characters level faster; Legends grow in depth, not numbers
+- **Skill Caps**: Tier 1 caps at +5 during Origin, rising to +7 after. Tier 3-4 cap at +9. At-cap skills gain Facets (named applications)
 - **Narrative Scope**: Each tier operates at a specific scope level; scope expansion requires earned story progression
 
 ## Keyboard Shortcuts
@@ -328,6 +375,10 @@ The Nexus respects player agency with multiple protections:
 - ✅ Scope enforcement — stories stay at character tier scope level
 - ✅ Meta-language isolation — no game mechanics in narrative dialogue
 - ✅ Concrete examples of violations in framework
+- ✅ Decision Integrity — intent/approach/stakes established before consequential rolls
+- ✅ Embodied Agency — involuntary PC reactions require established basis
+- ✅ Protocol Arbitration — player instruction always outranks all other mandates
+- ✅ Nexus Constitution — 13 inviolable invariants protecting player sovereignty
 
 If the AI ever railroads: **"Stop. You're narrating my character's actions. Let me decide."**
 
@@ -343,7 +394,7 @@ If the AI ever railroads: **"Stop. You're narrating my character's actions. Let 
 ```
 nexus/
 ├── storyteller.py       # Desktop application
-├── framework.txt        # Nexus Framework v3.4
+├── framework.txt        # Nexus Framework v3.5
 ├── character_sheet.txt  # Persistent character data (rolling summary)
 ├── index.html           # Web version
 ├── nexus.html           # Mobile-optimized web version
@@ -353,7 +404,20 @@ nexus/
 
 ## Version History
 
-**v3.4** (Current) — Compiled Edition
+**v3.5** (Current) — Integrity Edition
+- Nexus Constitution (13 hard invariants), Protocol Arbitration Layer (7-level conflict hierarchy)
+- Epistemic State Engine (7 proposition classes), Decision Integrity Protocol (intent/approach/stakes)
+- Canon and Divergence Protocol, Investigation and Mystery Architecture, NPC-to-NPC Social Graph
+- Activation Map (cadence routing for all modules)
+- Amendment 1.7 rewritten: Writing Women positive architecture (Three-Part Character Test, Positive Interiority Fields, Archetype-Bundle Detection, Gender Ecology, Desire Ownership, Narrative Labor Ledger, and 6 more subsections)
+- Outcome Geometry repair (Fail 1-4 contradiction fixed)
+- Embodied Agency Protocol (PC reaction boundary)
+- Skill ontology clarified (subskills, not 5 scores), advancement formula fixed, tier-adjusted DCs corrected
+- Blast-Radius Test replaces automatic Resolution Rupture
+- NPC State Stance replaces automatic state allegiance
+- 12 additional repairs: Slow-Burn NPC Initiative, relationship roll limits, planted gun reverse-audit, scene vector rule, ambient incident dignity, prose-rule cleanup, cool-down causality exception, and more
+
+**v3.4** — Compiled Edition
 - Fully self-contained: all sections inlined, restored, or reconstructed
 - Ambient Incident Engine (Amendment 1.10): world-state-driven background incident generation with 5 categories, 4 density tiers, per-state defaults, and player override
 - Amendments 2.0–2.10: Repertory Principle, Reputation Distortion Engine, Faction Clocks, Motif Registry, Planted Gun Registry, Location Arcs, Interlude Protocol, Diegetic Recap, Living Speech Lexicon, The World's Clock, Series Finale Protocol
@@ -387,7 +451,7 @@ nexus/
 - Complication Engine (narrow margins produce tactical trade-offs)
 - NPC Agenda Clocks + Missed Connection + Unprompted Intercept
 - Conditioned Response upgrades: Threshold Carryover + Ghost Sensations
-- Season Premiere (hard cut arc transitions), Arc Escalation Directive, Resolution Rupture
+- Season Premiere (hard cut arc transitions), Arc Escalation Directive, Resolution Rupture (now Blast-Radius Test in v3.5)
 - Invisible Ledger, Cool-Down Mandate, Sensory Triggers, Intimacy Bleed
 - "Cheap Alien" Prohibition, Linguistic Blend Mandate, Occupational Drift
 - Stylistic Primer + Lexical Bounty (prose calibration hardening)
