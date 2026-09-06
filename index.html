@@ -722,6 +722,30 @@
         <h3 id="review-title"></h3><div id="review-text"></div><select id="review-select" aria-label="Choose option"></select>
         <div class="modal-buttons"><button class="modal-btn secondary" id="review-cancel">Cancel</button><button class="modal-btn primary" id="review-accept">Apply</button></div>
     </dialog>
+    <script>
+        // Keep diagnostics inline so they work even when the application files are missing.
+        window.nexusStartupComplete = false;
+        window.nexusStartupFault = false;
+        function nexusStartupError(message) {
+            if (window.nexusStartupComplete || window.nexusStartupFault) return;
+            window.nexusStartupFault = true;
+            document.getElementById('status').textContent = 'Startup failed: ' + message;
+            document.getElementById('status').className = 'status error';
+            document.getElementById('save-status').textContent = 'Existing browser saves and keys have not been cleared.';
+        }
+        window.addEventListener('error', function(event) {
+            if (event.target && event.target.tagName === 'SCRIPT') {
+                nexusStartupError('Could not load ' + event.target.getAttribute('src') + '. Upload the entire js folder alongside index.html, then reload.');
+            } else if (event.message) {
+                nexusStartupError(event.message);
+            }
+        }, true);
+        setTimeout(function() {
+            if (!window.nexusStartupComplete && document.getElementById('status').textContent === 'Loading…') {
+                nexusStartupError('Loading did not finish. Check that the js folder and framework.txt are served with this page.');
+            }
+        }, 15000);
+    </script>
     <script src="js/core.js"></script>
     <script src="js/models.js"></script>
     <script src="js/providers.js"></script>
