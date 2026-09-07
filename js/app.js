@@ -11,8 +11,10 @@ function install(data) {
     $('session-name-input').value=currentStoryName;renderMessages();updateDeskStatus();
 }
 function idle() { if(!ready){setStatus('Still loading browser storage and framework.','error');return false;} if(operation){setStatus('Finish or stop the current '+operation+' first.','error');return false;} return true; }
-function busy(label,canStop=false) {
+function busy(label,canStop=false,background=false) {
     operation=label; isGenerating=true;
+    // Draft writes retain the operation lock without blurring a focused mobile input.
+    if(background)return;
     $('send-btn').disabled=!canStop;$('send-btn').textContent=canStop?'Stop':'Working…';$('send-btn').onclick=canStop?stopGeneration:()=>{};
     $('message-input').disabled=true;
     document.querySelectorAll('.header-btn').forEach(b=>b.disabled=true);
@@ -262,7 +264,7 @@ input.addEventListener('input',()=>{
     clearTimeout(draftTimer);const capturedId=campaign.campaign_id;
     draftTimer=setTimeout(async()=>{
         if(!ready||operation||campaign.campaign_id!==capturedId)return;
-        busy('draft save');try{await commit({...snapshot(),draft:input.value});}catch(e){$('save-status').textContent='Draft not saved: '+e.message;}finally{release();}
+        busy('draft save',false,true);try{await commit({...snapshot(),draft:input.value});}catch(e){$('save-status').textContent='Draft not saved: '+e.message;}finally{release();}
     },700);
 });
 window.addEventListener('beforeunload',e=>{if(operation||input.value!==(campaign.draft||'')){e.preventDefault();e.returnValue='';}});
