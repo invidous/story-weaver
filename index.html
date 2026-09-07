@@ -531,6 +531,10 @@
         .desk-grid input { margin: 4px 0 10px; }
         :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
         @media(max-width: 600px) { .header {position: sticky; top: 0; padding: 8px;} .header-spacer {display:none;} .header h1 {font-size: 1rem;} .header-btn {padding:6px;} .desk-grid {grid-template-columns:1fr;} }
+        /* Keep touch-device editing at a readable size without disabling pinch zoom. */
+        @media (pointer: coarse), (max-width: 600px) {
+            #message-input, input, textarea, select { font-size: 16px !important; }
+        }
     </style>
 </head>
 <body>
@@ -751,6 +755,6 @@
     <script src="js/providers.js"></script>
     <script src="js/store.js"></script>
     <script src="js/ui.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=3.6-mobile-input-1"></script>
 </body>
 </html>
