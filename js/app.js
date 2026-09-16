@@ -193,7 +193,7 @@ async function archiveAndTrim(){
         const parsed=Core.splitReply(rawSummary),summary=parsed.prose;
         Core.validateSummary(summary);
         if(!parsed.delta)throw Error('Archive summary lacked a valid continuity block; nothing was trimmed.');
-        const preservedState=Core.applyDelta(before.campaign_state,{...parsed.delta,chronicle:[],scene_end:false},archiveId,new Set([...input.map(m=>m.id),...before.campaign_state.records.flatMap(r=>r.source_turns),'legacy_sheet']));
+        const preservedState=Core.applyDelta(before.campaign_state,{...parsed.delta,chronicle:[],scene_end:false},archiveId,new Set([...input.map(m=>m.id),...before.campaign_state.records.flatMap(r=>r.source_turns),'legacy_sheet',archiveId]));
         if(abortController.signal.aborted)return;
         const accepted=await reviewDialog('Review archive summary',summary+'\n\nContinuity records: '+before.campaign_state.records.length+' → '+preservedState.records.length+'. Existing records retain history. Apply replaces the readable sheet and trims the active transcript. The original is available in Recovery.');
         if(!accepted||abortController.signal.aborted)return;
