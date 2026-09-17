@@ -2694,6 +2694,31 @@ closes that gap without creating a parallel system: it sideloads into the
 existing Prose Density Profile, Threat Vector Pause, Contrast Pulse, and World
 Evolution Roll mechanics.
 
+PASSIVE TEXTURE BASELINE (v3.6):
+The roll-based trigger system below generates specific incidents. But ambient
+texture is not only incidents — it is the standing population activity that
+makes a place feel inhabited. Every scene description in an occupied location
+must include background population appropriate to the setting, time, and
+density tier. This is not a separate step to remember; it is part of writing
+the scene, the same way Sensory Immersion requires multiple senses.
+
+What this means in practice: a nighttime street in a lived-in district has
+people on it — drunks, workers heading home, couples arguing, sex workers on
+corners, someone pissing in an alley. A market has hawkers, beggars, thieves
+working the crowd. A tavern has regulars nursing drinks, a passed-out patron,
+a dice game in the corner. These are not incidents requiring rolls; they are
+the fabric of the environment, delivered as naturally as mentioning the
+weather or the lighting. If a location is Woven or Pervasive in any category,
+that category's texture appears in every scene set there, not only when a roll
+fires. The roll system generates noteworthy moments on top of this baseline.
+
+STANDING SCENE TEXTURE: Ambient texture does not stop after location entry.
+Scenes that persist in one location reflect ongoing background activity. A
+long tavern conversation includes new patrons arriving, someone getting loud,
+a working girl leading a client upstairs — not frozen scenery. Refresh
+background details naturally when writing responses, especially in extended
+scenes.
+
 RELATIONSHIP TO OTHER PROTOCOLS:
 - Distinct from AMENDMENT 1.1 (Intimacy Spectrum): that gates content the PC
   participates in. This gates content the PC merely witnesses.
@@ -2734,10 +2759,17 @@ stretch can be Pervasive in one category and Absent in another simultaneously.
 --------------------------------------------------------------------------------
 
 SCENERY (default):
-Witnessed only. One sentence, no stop, no mechanical check. The PC may engage
-if the player chooses, but nothing pauses narration for it.
-Example: "Outside the noodle stand, two men do the slow-motion junk-sick
-shuffle against the wall. Nobody looks twice."
+Witnessed only. One to three sentences woven into the scene description, no
+stop, no mechanical check. Enough detail that the world registers as alive,
+not so much that it hijacks the scene's focus. The PC may engage if the player
+chooses, but nothing pauses narration for it.
+Examples:
+  "Outside the noodle stand, two men do the slow-motion junk-sick shuffle
+  against the wall. Nobody looks twice."
+  "A woman in a short skirt and heeled boots catches his eye from a doorway,
+  tilts her chin — you coming? — then loses interest and lights a cigarette."
+  "Down the alley, someone's getting their pockets turned out against a wall.
+  The victim's not fighting it. Practiced resignation."
 
 ACTIVE (rarer, gated):
 The PC's path intersects something happening in real time. This routes through
@@ -2772,30 +2804,37 @@ enough to expect.
 
 | World State | Vice/Hedonism | Crime/Danger | Disorder/Chaos | Poverty/Decay | Community/Grace |
 |-------------|---------------|--------------|----------------|---------------|-----------------|
-| DYSTOPIAN   | Occasional    | Woven        | Occasional     | Pervasive     | Occasional      |
-| UTOPIAN     | Occasional    | Absent       | Absent         | Absent        | Occasional      |
-| FRONTIER    | Occasional    | Occasional   | Occasional     | Occasional    | Woven           |
-| BALANCED    | Occasional    | Occasional   | Occasional     | Occasional    | Occasional      |
-| CHAOS       | Occasional    | Pervasive    | Pervasive      | Woven         | Occasional      |
-| DECADENT    | Woven–Perv.   | Occasional   | Occasional     | Woven         | Absent          |
-| OCCUPIED    | Absent        | Woven        | Occasional     | Woven         | Woven           |
+| DYSTOPIAN   | Woven         | Woven        | Woven          | Pervasive     | Occasional      |
+| UTOPIAN     | Occasional    | Absent       | Absent         | Absent        | Woven           |
+| FRONTIER    | Woven         | Woven        | Occasional     | Occasional    | Woven           |
+| BALANCED    | Occasional    | Occasional   | Occasional     | Occasional    | Woven           |
+| CHAOS       | Woven         | Pervasive    | Pervasive      | Woven         | Occasional      |
+| DECADENT    | Pervasive     | Occasional   | Woven          | Woven         | Absent          |
+| OCCUPIED    | Occasional    | Woven        | Woven          | Woven         | Woven           |
 | GILDED      | Occasional    | Occasional   | Absent         | Absent        | Occasional      |
-| LIMINAL     | Occ.–Woven    | Woven        | Woven          | Occasional    | Woven           |
+| LIMINAL     | Woven         | Woven        | Woven          | Woven         | Woven           |
 | ENCLAVE     | Occasional    | Absent/Occ.  | Occasional     | Occasional    | Pervasive       |
-| NOIR        | Occasional    | Woven        | Occasional     | Occasional    | Occasional      |
-| DYING       | Occasional    | Occasional   | Occasional     | Woven         | Occasional      |
-| MYTHIC      | Occasional    | Occasional   | Occasional     | Occasional    | Occasional      |
+| NOIR        | Woven         | Woven        | Woven          | Occasional    | Occasional      |
+| DYING       | Occasional    | Woven        | Occasional     | Woven         | Occasional      |
+| MYTHIC      | Occasional    | Occasional   | Occasional     | Occasional    | Woven           |
 
-Notes on the table:
+Notes on the table (v3.6 revision — density shifted upward for lived-in
+world states; the previous defaults suppressed background texture):
 - UTOPIAN: Crime/Danger and Poverty/Decay are ABSENT but hidden/concealed —
   their suppression IS the texture.
-- DECADENT: Poverty is Woven but invisible to those inside the excess.
-  Community/Grace is Absent except as performance.
+- FRONTIER: Vice and Crime are Woven — frontier towns have brothels, card
+  sharps, and opportunistic violence as baseline texture, not occasional color.
+- DECADENT: Vice is Pervasive — excess is the defining feature. Poverty is
+  Woven but invisible to those inside the excess. Community/Grace is Absent
+  except as performance.
 - GILDED: Crime trends white-collar; Poverty/Decay is Absent (invisible, not
   nonexistent). Community is performed.
 - ENCLAVE: Crime is Absent inside the walls, Occasional outside.
-- NOIR: Community/Grace is Occasional but rare and precious when it lands.
-- DYING: Community/Grace is Occasional, precious, and carries "last" weight.
+- NOIR: Vice, Crime, and Disorder are all Woven — seedy bars, back-alley
+  deals, working girls under neon, petty violence. Community/Grace is
+  Occasional but rare and precious when it lands.
+- DYING: Crime is Woven (desperation breeds it). Community/Grace is
+  Occasional, precious, and carries "last" weight.
 - MYTHIC: Vice is ritual-coded (bacchanalia, sacred excess).
 
 SPATIAL OVERRIDE: Per the existing Spatial State Variation system, a location's
@@ -2815,18 +2854,22 @@ Pervasive (crisis solidarity) depending on the nature of the rupture.
 5. TRIGGER MECHANICS
 --------------------------------------------------------------------------------
 
-Roll on location entry and, separately, during any transit/travel scene (the
-exact gap this protocol closes in MINIMAL-density stretches).
+Roll on location entry, during any transit/travel scene, and once during
+extended scenes that stay in one location (the engine does not go silent
+just because the PC sits down). The Passive Texture Baseline above provides
+standing background independent of these rolls; rolls generate noteworthy
+moments on top of that baseline.
 
 1d6 per applicable category at Occasional or higher:
-  1-3: No incident this pass
-  4-5: Scenery-tier incident fires
-  6:   Active-tier incident fires (only if category is Woven or Pervasive;
-       at Occasional, treat a 6 as Scenery-tier instead)
+  At Occasional:  4-5 Scenery, 6 Scenery (never Active)
+  At Woven:       3-5 Scenery, 6 Active
+  At Pervasive:   2-4 Scenery, 5-6 Active
 
-Do not roll for Absent categories. Do not roll more than 2-3 categories per
-scene — pick whichever are most tonally live for the location, not all five
-reflexively.
+Do not roll for Absent categories. Roll 2-3 categories per scene — pick
+whichever are most tonally live for the location, not all five reflexively.
+When a category is Woven or Pervasive, its texture appears in scene
+descriptions regardless of the roll; the roll determines whether something
+noteworthy happens on top of the standing texture.
 
 --------------------------------------------------------------------------------
 6. GROUNDING REQUIREMENT
