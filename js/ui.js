@@ -323,7 +323,7 @@ function renderMessages() {
     container.innerHTML = messages.map(msg => `
         <div class="message ${msg.role}">
             <div class="message-role">${msg.role === 'user' ? 'You' : 'The Nexus'}${['failed','interrupted','pending'].includes(msg.status) ? ' · ' + msg.status : ''}</div>
-            <div class="message-content">${escapeHtml(msg.content)}</div>
+            <div class="message-content">${escapeHtml(msg.role==='assistant'?NexusCore.visibleText(msg.content):msg.content)}</div>
         </div>
     `).join('');
 
@@ -341,7 +341,7 @@ function addMessage(role, content) {
     div.className = `message ${role}`;
     div.innerHTML = `
         <div class="message-role">${role === 'user' ? 'You' : 'The Nexus'}</div>
-        <div class="message-content">${escapeHtml(content)}</div>
+        <div class="message-content">${escapeHtml(role==='assistant'?NexusCore.visibleText(content):content)}</div>
     `;
     container.appendChild(div);
     scrollToBottom();
@@ -353,7 +353,7 @@ function updateLastMessage(content) {
     const messages = document.querySelectorAll('.message.assistant');
     const last = messages[messages.length - 1];
     if (last) {
-        last.querySelector('.message-content').textContent = content;
+        last.querySelector('.message-content').textContent = NexusCore.visibleText(content);
         scrollToBottom();
     }
 }

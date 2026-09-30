@@ -58,25 +58,34 @@
            !Array.isArray(rec.source_turns) || !rec.source_turns.every(s=>typeof s==='string')) throw Error('Invalid continuity record.');
     }
     function visibleText(text) {
-        const at=text.indexOf('<nexus-state>');
-        if(at>=0) return text.slice(0,at).trimEnd();
+        const marker=stateMarker(text);
+        if(marker) return text.slice(0,marker.index).trimEnd();
         // Do not briefly expose a partial opening marker while streaming.
-        for(let n=1;n<'<nexus-state>'.length;n++) if(text.endsWith('<nexus-state>'.slice(0,n))) return text.slice(0,-n);
+        const at=text.lastIndexOf('<');
+        if(at>=0) {
+            const suffix=text.slice(at).replace(/\s/g,'').toLowerCase();
+            if(['<nexus-state>','<!--nexus-state-->'].some(m=>m.startsWith(suffix))) return text.slice(0,at);
+        }
         return text;
     }
+    function stateMarker(text) {return /<nexus-state\s*>|<!--\s*nexus-state\s*-->/i.exec(text);}
     function splitReply(text) {
-        const at=text.indexOf('<nexus-state>');
-        if(at<0) return {prose:text.trim(),delta:null,warning:'No continuity update received; existing records retained.'};
-        const end=text.indexOf('</nexus-state>',at);
-        if(end<0) return {prose:visibleText(text).trim(),delta:null,warning:'Incomplete continuity update; existing records retained.'};
-        try { return {prose:text.slice(0,at).trim(),delta:JSON.parse(text.slice(at+13,end)),warning:null}; }
+        const marker=stateMarker(text);
+        if(!marker) return {prose:visibleText(text).trim(),delta:null,warning:'No continuity update received; existing records retained.'};
+        const at=marker.index,start=at+marker[0].length;
+        const closing=marker[0].startsWith('<!--')?/<!--\s*\/nexus-state\s*-->/i:/<\/nexus-state\s*>/i;
+        const end=closing.exec(text.slice(start));
+        if(!end) return {prose:visibleText(text).trim(),delta:null,warning:'Incomplete continuity update; existing records retained.'};
+        try { return {prose:text.slice(0,at).trim(),delta:JSON.parse(text.slice(start,start+end.index)),warning:null}; }
         catch { return {prose:text.slice(0,at).trim(),delta:null,warning:'Invalid continuity update; existing records retained.'}; }
     }
     function applyDelta(state, delta, turnId, knownTurns) {
         if(!object(delta) || !Array.isArray(delta.upserts) || !Array.isArray(delta.chronicle)) throw Error('Invalid continuity update shape.');
         const next=clone(state), updates=new Set();
-        for(const rec of delta.upserts) {
-            validateRecord(rec);
+        for(const raw of delta.upserts) {
+            validateRecord(raw);
+            // Accept a display-label prefix only when it resolves to real evidence.
+            const rec={...raw,source_turns:raw.source_turns.map(t=>knownTurns.has(t)?t:t.replace(/^Turn\s+/i,''))};
             if(updates.has(rec.id)) throw Error('Duplicate continuity update.');
             updates.add(rec.id);
             if(!rec.source_turns.length || !rec.source_turns.every(t=>knownTurns.has(t))) throw Error('Continuity source is not in this conversation.');
@@ -106,6 +115,7 @@
     function stateContract(turnId) {
         return `APPLICATION CONTINUITY CONTRACT v2
 Return normal narrative prose first. Then append exactly one <nexus-state>JSON</nexus-state> block. This block is GM bookkeeping, hidden from ordinary display. Current assistant turn ID: ${turnId}.
+Use the exact XML-style markers above, not HTML comments or Markdown fences. source_turns contains bare IDs, without the displayed "Turn " label.
 JSON shape: {"upserts":[],"chronicle":[],"scene_end":false}.
 Each upsert: {"id":"stable_id","kind":"${kinds.join('|')}","text":"specific fact or explicitly labeled uncertainty","visibility":"player|gm","certainty":"fact|claim|belief|inference|unknown","source_turns":["source turn ID"]}. Choose a SINGLE value for each pipe-separated enum, never the entire list.
 Reuse existing IDs for changed records. Include only consequential new or changed records; retain all untouched records. Record PC skills/injuries, NPC agendas, promises, knowledge sources and holders, world clock, threads, faction clocks, mystery truths, canon divergences, motifs, planted guns, locations, and population checks when relevant.
