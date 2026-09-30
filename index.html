@@ -521,7 +521,7 @@
         .header-buttons { flex-wrap: wrap; }
         .header-btn:disabled { opacity: .5; }
         #stream-preview { white-space: pre-wrap; max-width: 900px; margin: 0 auto 12px; padding: 0 20px; line-height: 1.65; }
-        #save-status, #context-status { font-size: .75rem; color: var(--text-dim); text-align: center; padding: 3px; }
+        #save-status, #context-status, #cache-status { font-size: .75rem; color: var(--text-dim); text-align: center; padding: 3px; }
         #campaign-records p { padding: 8px 0; border-bottom: 1px solid var(--border); }
         dialog { margin: auto; max-width: min(720px, 95vw); width: 95%; max-height: 90vh; overflow: auto; padding: 24px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-mid); color: var(--text); }
         dialog::backdrop { background: #000b; }
@@ -570,6 +570,7 @@
         <div class="status" id="status" role="status">Loading…</div>
         <div id="save-status">Browser recovery loading…</div>
         <div id="context-status"></div>
+        <div id="cache-status" aria-live="polite">Prompt caching ready · usage appears after a story request.</div>
     </div>
 
     <div class="modal-overlay" id="settings-modal">
@@ -604,6 +605,9 @@
             </select>
             <p id="model-note" style="color: var(--text-dim); font-size: 12px; margin-bottom: 14px;">Catalog checked September 6, 2026.</p>
 
+            <label for="claude-cache-ttl">Claude framework cache</label>
+            <select id="claude-cache-ttl"><option value="1h">1 hour (default for reading between turns)</option><option value="5m">5 minutes (rapid turns)</option><option value="off">Off</option></select>
+            <p style="color: var(--text-dim); font-size: 12px; margin-bottom: 14px;">Claude cache writes cost 2× normal input for 1 hour, or 1.25× for 5 minutes. Reuse is cheaper; isolated turns can cost more. OpenAI uses supported framework caching; Gemini uses automatic caching. Your full framework and current campaign are still sent.</p>
             <label>Temperature: <span id="temp-display">1.0</span></label>
             <input type="range" id="temp-slider" min="0" max="1.0" step="0.05" value="1.0" oninput="updateTempDisplay()">
             <p style="color: var(--text-dim); font-size: 12px; margin-bottom: 14px;">Temperature is sent only for models with supported sampling controls. Existing keys stay in this browser.</p>
@@ -629,6 +633,8 @@
 
             <div style="margin-bottom: 16px;">
                 <button class="modal-btn secondary" style="width: 100%; background: #2a2640;" onclick="archiveAndTrim()">📦 Archive & Trim</button>
+                <p id="sessions-status" class="status" role="status" aria-live="polite"></p>
+                <button id="archive-stop" class="modal-btn secondary" hidden onclick="stopGeneration()">Stop archive</button>
                 <p style="color: var(--text-dim); font-size: 12px; margin-top: 4px;">Keep a recovery checkpoint, review the summary, then trim at a chosen scene boundary.</p>
                 <button class="modal-btn secondary" onclick="showRecovery()">Recovery</button>
                 <button class="modal-btn secondary" onclick="branchCampaign()">Branch campaign</button>
@@ -751,10 +757,10 @@
         }, 15000);
     </script>
     <script src="js/core.js"></script>
-    <script src="js/models.js"></script>
-    <script src="js/providers.js"></script>
+    <script src="js/models.js?v=20260929-cache-1"></script>
+    <script src="js/providers.js?v=20260929-cache-1"></script>
     <script src="js/store.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/app.js?v=3.6-mobile-input-1"></script>
+    <script src="js/ui.js?v=20260929-cache-1"></script>
+    <script src="js/app.js?v=20260929-cache-1"></script>
 </body>
 </html>

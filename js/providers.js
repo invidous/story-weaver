@@ -22,7 +22,9 @@
             if(buffer.trim() || lines.length) throw Error('Stream ended in an incomplete event. Retry the turn.');
         } finally { await reader.cancel().catch(()=>{}); reader.releaseLock(); }
     }
-    function request({provider,model,key,temperature=1,system,messages,maxTokens=12288,stream=true}, info={}) {
+    function request({provider,model,key,temperature=1,system,messages,maxTokens=12288,stream=true,cachePrefix='',cacheTtl='1h'}, info={}) {
+        if(cachePrefix && !system.startsWith(cachePrefix)) throw Error('Cache prefix must match the beginning of the system prompt.');
+        const cache=cachePrefix && cacheTtl!=='off';
         // Never forward local IDs, status, snapshots, or continuity metadata as API message properties.
         const conversation=messages.filter(m=>m.status!=='failed'&&m.status!=='interrupted'&&m.role!=='system').map(({role,content})=>({role,content}));
         let url,headers={'Content-Type':'application/json'},body;
@@ -30,11 +32,20 @@
             url='https://api.anthropic.com/v1/messages';
             headers={...headers,'x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
             body={model,system,messages:conversation,max_tokens:maxTokens,stream};
+            if(cache) body.system=[{type:'text',text:cachePrefix,cache_control:{type:'ephemeral',ttl:cacheTtl==='5m'?'5m':'1h'}},
+                ...(system.length>cachePrefix.length?[{type:'text',text:system.slice(cachePrefix.length)}]:[])];
             if(info.sampling===true) body.temperature=temperature;
         } else if(provider==='openai') {
             url='https://api.openai.com/v1/chat/completions';
             headers.Authorization='Bearer '+key;
             body={model,messages:[{role:'system',content:system},...conversation],max_completion_tokens:maxTokens,stream};
+            if(stream) body.stream_options={include_usage:true};
+            // Explicit breakpoints are supported starting with GPT-5.6. Older models retain automatic caching.
+            if(cache && /^gpt-(?:6(?:[.-]|$)|5\.[6-9](?:[.-]|$))/.test(model)) {
+                body.messages[0].content=[{type:'text',text:cachePrefix,prompt_cache_breakpoint:{mode:'explicit'}},
+                    ...(system.length>cachePrefix.length?[{type:'text',text:system.slice(cachePrefix.length)}]:[])];
+                body.prompt_cache_options={mode:'explicit',ttl:'30m'};
+            }
             if(info.sampling===true) body.temperature=temperature;
             if(info.reasoning) body.reasoning_effort=info.reasoning;
         } else if(provider==='google') {
@@ -53,8 +64,19 @@
             throw Error(data.error?.message || 'Provider HTTP '+response.status);
         }
         let text='',finish=null,terminal=false;
+        let usage={provider:options.provider,model:options.model};
+        function reportUsage(data) {
+            const raw=options.provider==='google'?data.usageMetadata:(data.usage||data.message?.usage);
+            if(!raw)return;
+            const fields=options.provider==='anthropic'?{cachedTokens:raw.cache_read_input_tokens,cacheWriteTokens:raw.cache_creation_input_tokens}:
+                options.provider==='google'?{cachedTokens:raw.cachedContentTokenCount}:
+                {cachedTokens:raw.prompt_tokens_details?.cached_tokens,cacheWriteTokens:raw.prompt_tokens_details?.cache_write_tokens};
+            for(const [key,value] of Object.entries(fields)) if(Number.isFinite(value)&&value>=0) usage[key]=value;
+            options.onUsage?.({...usage});
+        }
         function consume(data) {
             if(data.error || data.type==='error') throw Error(data.error?.message || 'Provider stream error.');
+            reportUsage(data);
             if(options.provider==='anthropic') {
                 if(data.type==='content_block_delta'&&data.delta?.text) text+=data.delta.text;
                 if(data.type==='message_delta'&&data.delta?.stop_reason) finish=data.delta.stop_reason;
@@ -74,6 +96,7 @@
         }
         if(options.stream===false) {
             const data=await response.json();
+            if(options.provider!=='google')reportUsage(data);
             if(options.provider==='anthropic') { text=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join(''); finish=data.stop_reason; }
             else if(options.provider==='openai') { text=data.choices?.[0]?.message?.content||''; finish=data.choices?.[0]?.finish_reason; }
             else consume(data);

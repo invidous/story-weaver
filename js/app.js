@@ -53,7 +53,13 @@ async function sendMessage() {
         const pending={...before,messages:[...before.messages,user]};
         await commit(pending); started=true;
         $('message-input').value='';$('message-input').style.height='auto';
-        const full=await NexusProviders.generate({...providerOptions(),system:Core.buildPrompt(NEXUS_FRAMEWORK,pending,getProvider()==='google'?GEMINI_REINFORCEMENT:'',turnId),
+        $('cache-status').textContent='This request: cache usage not yet reported.';
+        const full=await NexusProviders.generate({...providerOptions(),cachePrefix:NEXUS_FRAMEWORK,
+            cacheTtl:getProvider()==='anthropic'?getClaudeCacheTtl():'1h',
+            onUsage:usage=>{$('cache-status').textContent='Latest request ('+usage.model+'): '+
+                (usage.cachedTokens===undefined?'cache reads not reported':usage.cachedTokens.toLocaleString()+' cached input tokens')+
+                (usage.cacheWriteTokens===undefined?'':' · '+usage.cacheWriteTokens.toLocaleString()+' tokens written to cache');},
+            system:Core.buildPrompt(NEXUS_FRAMEWORK,pending,getProvider()==='google'?GEMINI_REINFORCEMENT:'',turnId),
             messages:pending.messages.map(m=>({...m,content:'[Turn '+m.id+']\n'+m.content}))},text=>{
                 partial=Core.visibleText(text);$('stream-preview').textContent=partial||'The Nexus is thinking…';
             });
@@ -171,17 +177,20 @@ function reviewDialog(title,text,choices=null){
 }
 async function archiveAndTrim(){
     if(!idle())return;
-    if(messages.length<15){alert('Archive after at least 15 messages.');return;}
-    if(!providerOptions().key){showSettings();return;}
-    busy('archive',true);abortController=new AbortController();const before=snapshot();
     try{
+        if(messages.length<15){setStatus('Archive needs at least 15 messages; this campaign has '+messages.length+'.','error');return;}
+        if(!providerOptions().key){closeSessions();showSettings();setStatus('Enter the selected provider’s API key before archiving.','error');return;}
+        busy('archive',true);abortController=new AbortController();
+        const before=snapshot();
+        setStatus('Choose which completed turn to archive.');
         let cut=Core.trimIndex(messages,campaign.campaign_state.scene_breaks);
         const choices=messages.map((m,i)=>({m,i})).filter(({m,i})=>m.role==='assistant'&&m.status!=='interrupted'&&i>=1&&i<messages.length-3&&messages[i+1].role==='user');
         if(!choices.length)throw Error('No complete turn boundary is available for archival.');
         const selection=await reviewDialog('Choose the archive boundary','Messages through this response will be archived. The remaining conversation stays active. Choose a genuine scene boundary; cancel leaves everything unchanged.',choices.map(({m,i})=>({value:String(i+1),label:(i+1===cut?'Suggested · ':'')+'Through message '+(i+1)+': '+m.content.slice(0,85)})).sort((a,b)=>Number(b.value===String(cut))-Number(a.value===String(cut))));
-        if(selection===null)return;cut=Number(selection);
+        if(selection===null){setStatus('Archive cancelled; transcript retained.');return;}cut=Number(selection);
         const quality=await reviewDialog('Summary quality','Review the proposed player-facing sheet before applying. Existing campaign ledgers and the original transcript are preserved.',[{value:'deep',label:'Deep — stronger continuity'},{value:'quick',label:'Quick — lower cost'}]);
-        if(!quality||abortController.signal.aborted)return;
+        if(!quality||abortController.signal.aborted){setStatus('Archive cancelled; transcript retained.');return;}
+        $('archive-stop').hidden=false;
         // Persist the original before any provider call or trimming. Even a cancelled download is recoverable.
         await store.save(before,before.revision,checkpoint(before,'Before archive'));
         setStatus('Preparing archive summary…');
@@ -193,13 +202,13 @@ async function archiveAndTrim(){
         const parsed=Core.splitReply(rawSummary),summary=parsed.prose;
         Core.validateSummary(summary);
         if(!parsed.delta)throw Error('Archive summary lacked a valid continuity block; nothing was trimmed.');
-        const preservedState=Core.applyDelta(before.campaign_state,{...parsed.delta,chronicle:[],scene_end:false},archiveId,new Set([...input.map(m=>m.id),...before.campaign_state.records.flatMap(r=>r.source_turns),'legacy_sheet',archiveId]));
+        const preservedState=Core.applyDelta(before.campaign_state,{...parsed.delta,chronicle:[],scene_end:false},archiveId,new Set([...input.map(m=>m.id),...before.campaign_state.records.flatMap(r=>r.source_turns),'legacy_sheet']));
         if(abortController.signal.aborted)return;
         const accepted=await reviewDialog('Review archive summary',summary+'\n\nContinuity records: '+before.campaign_state.records.length+' → '+preservedState.records.length+'. Existing records retain history. Apply replaces the readable sheet and trims the active transcript. The original is available in Recovery.');
-        if(!accepted||abortController.signal.aborted)return;
+        if(!accepted||abortController.signal.aborted){setStatus('Archive cancelled; transcript retained.');return;}
         const next={...before,character_sheet:summary,campaign_state:preservedState,messages:before.messages.slice(cut),archive_history:[...(before.archive_history||[]),{id:archiveId,date:new Date().toISOString(),through_turn:before.messages[cut-1].id,count:cut}]};
         await commit(next);closeSessions();setStatus('Archive applied. Original retained in Recovery; use Download for a portable copy.','success');
-    }catch(e){setStatus(e.name==='AbortError'?'Archive stopped; transcript retained.':e.message,'error');}finally{release();}
+    }catch(e){setStatus(e.name==='AbortError'?'Archive stopped; transcript retained.':e.message,'error');}finally{if($('archive-stop'))$('archive-stop').hidden=true;release();}
 }
 async function showRecovery(){
     if(!idle())return;busy('recovery');
