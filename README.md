@@ -6,6 +6,8 @@ A browser-based AI Game Master for genre-flexible, consequence-driven adventures
 
 [Open The Nexus](https://invidous.github.io/story-weaver/)
 
+Prompt caching update (September 29, 2026): the stable framework now has an explicit cache boundary for Claude and supported newer OpenAI models. Gemini retains automatic caching. The composer shows provider-reported cache usage, and Settings offers Claude one-hour, five-minute, or Off options. The complete framework and fresh campaign state remain in every request. See [caching costs and upload instructions](docs/prompt-caching.md).
+
 ## Start playing
 
 1. Open the site and wait for **Nexus 3.6 ready**.
@@ -26,6 +28,7 @@ Keys remain in browser local storage and are sent to the selected provider for r
 - **Campaign Desk** shows known records, records rolls with intent and stakes, and accepts OOC canon corrections.
 - Updated model catalog preserves existing keys and settings.
 - Startup diagnostics identify missing scripts; optional browser UUID/fingerprint APIs no longer block startup.
+- Mobile drafting keeps the keyboard open during background autosave, and the editor uses a touch-readable input size to avoid browser auto-zoom.
 
 Existing world states, progression, narrative architecture, knowledge and mystery systems, and player agency boundaries remain present.
 

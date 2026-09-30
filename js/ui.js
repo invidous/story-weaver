@@ -34,6 +34,10 @@ function getOpenaiApiKey() {
 function getTemperature() {
     return parseFloat(localStorage.getItem('nexus_temperature') || '1.0');
 }
+function getClaudeCacheTtl() {
+    const value=localStorage.getItem('nexus_claude_cache_ttl');
+    return ['off','5m','1h'].includes(value)?value:'1h';
+}
 
 function onProviderChange() {
     const provider = document.getElementById('provider-select').value;
@@ -49,6 +53,7 @@ function showSettings() {
     document.getElementById('google-api-key-input').value = getGoogleApiKey();
     document.getElementById('openai-api-key-input').value = getOpenaiApiKey();
     document.getElementById('temp-slider').value = getTemperature();
+    document.getElementById('claude-cache-ttl').value = getClaudeCacheTtl();
     onProviderChange();  // renders model options + restores saved selection
     updateTempDisplay();
     document.getElementById('settings-modal').classList.add('active');
@@ -78,6 +83,7 @@ function saveSettings() {
     }
     localStorage.setItem('nexus_model', model);
     localStorage.setItem('nexus_temperature', temp);
+    localStorage.setItem('nexus_claude_cache_ttl', document.getElementById('claude-cache-ttl').value);
 
     closeSettings();
     setStatus('Settings saved', 'success');
@@ -367,4 +373,9 @@ function setStatus(text, type = '') {
     const status = document.getElementById('status');
     status.textContent = text;
     status.className = 'status ' + type;
+    const sessionsStatus = document.getElementById('sessions-status');
+    if (sessionsStatus) {
+        sessionsStatus.textContent = text;
+        sessionsStatus.className = 'status ' + type;
+    }
 }
