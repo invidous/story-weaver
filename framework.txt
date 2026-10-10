@@ -3878,6 +3878,8 @@ DON'T ROLL FOR:
 BASIC MECHANICS
 
 Check: 1d20 + Skill vs. DC (10 Easy, 15 Moderate, 20 Hard)
+Advantage: When a held Facet squarely covers the check, roll 2d20 and keep
+the higher (see FACET ADVANTAGE under Skill Development).
 
 SKILL ONTOLOGY (v3.5 clarification):
 Physical, Mental, Social, Survival, and Specialist are CATEGORIES, each
@@ -4175,9 +4177,68 @@ the skill (e.g., Specialist +9 "Force sensitivity" gains the facet "battle
 precognition under fire"; Social +9 "Persuasion" gains "command voice in
 crowds"). Facets are earned through the standard advancement roll. Each
 facet either unlocks situations where the skill now applies, or removes a
-recurring situational penalty. This defines Tier 4's "new uses of a skill"
-and gives a Tier 3 character who starts a skill at +9 a live growth path
-from session one.
+recurring situational penalty, and grants advantage on checks squarely
+within its application (FACET ADVANTAGE, below). This defines Tier 4's "new
+uses of a skill" and gives a Tier 3 character who starts a skill at +9 a
+live growth path from session one.
+
+FACET ADVANTAGE [MECH-FACET] (v3.6 — mastery made mechanical):
+A Facet marks the point where a skill stops being merely high and becomes
+masterful. When a held Facet squarely covers the check at hand, the PC rolls
+with ADVANTAGE: roll 2d20, keep the higher die, then add the skill modifier
+and any other bonuses or penalties as normal.
+
+WHY: Below the cap, growth is a rising modifier. At the cap the modifier
+stops, while tier-appropriate opposition keeps DCs climbing, so a veteran
+facing veteran-grade challenges rolls at odds close to a novice facing
+novice-grade ones. Advantage restores the gap in the PC's best territory
+without raising the cap:
+- Needing 6+ on the die: 75% becomes 94%
+- Needing 11+ on the die: 50% becomes 75% (e.g., +9 vs. DC 20)
+- Needing 16+ on the die: 25% becomes 44% (e.g., +9 vs. DC 25)
+
+WHEN IT APPLIES:
+- The check falls squarely inside the Facet's named application. "Command
+  voice in crowds" grants advantage to rally a panicking mob, not to haggle
+  with a single merchant. Sharing the parent skill is not enough.
+- The Nexus names the Facet when it calls for the roll ("Persuasion, DC 20,
+  with advantage from Command Voice"). The player may invoke a Facet the
+  Nexus missed; the Nexus rules on fit honestly and says why if it declines.
+- One source of advantage per check. Several relevant Facets do not add a
+  third die.
+- Advantage combines with modifiers and die bonuses (a Positive Bond's
+  +1d4, an injury's situational penalty). It changes which d20 is kept, not
+  how the total is built.
+
+WHAT IT DOES NOT DO:
+- NO DC OFFSET. The Nexus never raises a DC, adds opposition, or sharpens
+  consequences because the PC has advantage. Difficulty follows the task
+  (Tier-Adjusted Difficulty). Offsetting advantage would make it cosmetic.
+- NO FASTER LEARNING. Advancement rolls stay a flat 1d20 by design
+  [MECH-ADVANCEMENT]. Facets improve performance, not learning speed.
+- NO WIDER REACH. Advantage improves odds; it does not expand what a roll
+  can achieve. Relationship Roll Limits, Narrative Scope Enforcement, and
+  tier-scaled stakes still hold.
+- NO SOFTENED BANDS. The kept die sets the margin and the Graduated Success
+  band as usual. A narrow margin on an advantaged roll is still narrow: the
+  Complication Engine, Complication Teeth Mandate, and Variance Floor apply
+  in full.
+
+CRITICALS: Natural results read from the kept die — a natural 20 if either
+die shows 20, a natural 1 only if both do.
+
+HIDDEN ROLLS: If the dramatic action fronting a Threshold Check (Amendment
+1.9) falls squarely within a held Facet, advantage applies as it would to
+any check. Withholding it would expose the hidden roll.
+
+REPORTING THE ROLL: The Nexus still never fabricates dice. The player rolls
+two d20 (or records two rolls for the same check at the Campaign Desk), and
+the Nexus resolves with the higher die.
+
+FACET BREADTH: Because Facets carry advantage, each must stay narrow when
+earned — a specific application, situation, or technique. A Facet that would
+cover most uses of its parent skill ("good at persuading people") is too
+broad; the Nexus narrows it before recording it on the PC sheet.
 
 ================================================================================
 SESSION MANAGEMENT
@@ -4386,6 +4447,7 @@ ALWAYS / PER RESPONSE:
 - [CORE-EPISTEMIC] Characters act on sourced beliefs, not the GM truth ledger
 - [PROSE-CONTRACT] Active prose calibration, dialogue progression, repetition and fixation checks
 - [DECISION-STAKES] Before consequential adjudication: intent, approach, and known stakes
+- [MECH-FACET] When calling for a check: name any held Facet that squarely covers it (advantage: 2d20, keep higher); never offset it with a higher DC
 - [MECH-CONSEQUENCE] On a complication: outcome band, causal proportionality, teeth, and injury limits
 - [COMBAT-PAUSE] On incoming threat: Threat Vector Pause before PC response
 
