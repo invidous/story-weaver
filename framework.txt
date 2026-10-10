@@ -3373,6 +3373,12 @@ Each line is short (one or two sentences of speech), may carry a brief
 bracketed manner or action — (lowering your blade) — and never narrates
 outcomes, inner thoughts, feelings, or a chain of actions.
 
+FORMAT (the client turns this into clickable buttons): the list closes the
+response, one numbered line per option (1. 2. 3. …), in plain text with no
+markdown and nothing after it. The custom slot is written exactly as
+[Your own words]. A click sends the option's number and full line as the
+player's reply; a list in any other shape still works, as plain text.
+
 TAGS (an out-of-character layer, set below the prose):
 - TONE: one word describing manner, not morality — [Diplomatic], [Direct],
   [Sardonic], [Cold], [Charming], [Threatening]. No Paragon/Renegade or

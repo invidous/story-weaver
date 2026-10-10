@@ -327,7 +327,46 @@ function renderMessages() {
         </div>
     `).join('');
 
+    // Only the latest completed reply is answerable; earlier lists stay as plain text.
+    const last = messages[messages.length - 1];
+    const choice = last.role === 'assistant' && !['failed','interrupted','pending'].includes(last.status) && NexusCore.dialogueOptions(NexusCore.visibleText(last.content));
+    if (choice) renderDialogueOptions(container.lastElementChild.querySelector('.message-content'), choice);
+
     scrollToBottom();
+}
+
+function renderDialogueOptions(content, choice) {
+    const list = document.createElement('div');
+    list.className = 'dialogue-options';
+    list.setAttribute('role', 'group');
+    list.setAttribute('aria-label', 'Dialogue options');
+    for (const option of choice.options) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'dialogue-option' + (option.custom ? ' custom' : '');
+        const number = document.createElement('span');
+        number.className = 'dialogue-number';
+        number.textContent = option.number + '.';
+        button.append(number);
+        if (option.custom) {
+            button.append((option.tags[0] || option.line || 'Your own words') + '…');
+        } else {
+            for (const tag of option.tags) {
+                const chip = document.createElement('span');
+                // Class, calling, and origin lines are tagged in capitals, e.g. [SITH SORCERER].
+                chip.className = 'dialogue-tag' + (/^[^a-z]*[A-Z]{3,}[^a-z]*$/.test(tag) ? ' identity' : '');
+                chip.textContent = tag;
+                button.append(chip);
+            }
+            button.append(option.line);
+            button.title = 'Say this · Shift+click to edit it first';
+        }
+        button.onclick = event => chooseDialogueOption(option, event.shiftKey);
+        list.append(button);
+    }
+    content.textContent = choice.before;
+    content.append(list);
+    if (choice.after) content.append(choice.after);
 }
 
 function addMessage(role, content) {

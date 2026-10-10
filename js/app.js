@@ -83,6 +83,14 @@ async function sendMessage() {
     } finally {$('stream-preview').textContent='';release();}
 }
 function stopGeneration(){abortController?.abort();}
+function chooseDialogueOption(option,edit=false){
+    if(!idle())return;
+    if(option.custom||edit){
+        if(!option.custom){input.value=option.text;input.dispatchEvent(new Event('input'));}
+        input.focus();return;
+    }
+    input.value=option.text;sendMessage();
+}
 
 async function showSessions() {
     if(!idle())return;
