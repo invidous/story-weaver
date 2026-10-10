@@ -530,6 +530,13 @@
         .desk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .desk-grid input { margin: 4px 0 10px; }
         :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+        .dialogue-options { white-space: normal; display: flex; flex-direction: column; gap: 8px; margin: 14px 0 4px; }
+        .dialogue-option { display: block; width: 100%; text-align: left; background: var(--bg-light); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; font: inherit; line-height: 1.5; cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+        .dialogue-option:hover { border-color: var(--accent-dim); box-shadow: 0 0 12px var(--accent-glow); }
+        .dialogue-option.custom { color: var(--text-dim); font-style: italic; background: transparent; border-style: dashed; }
+        .dialogue-number { color: var(--accent); font-weight: 600; margin-right: 8px; }
+        .dialogue-tag { display: inline-block; font-size: .75em; font-weight: 600; letter-spacing: .03em; color: var(--text-dim); background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; margin-right: 6px; vertical-align: 1px; }
+        .dialogue-tag.identity { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-glow); }
         @media(max-width: 600px) { .header {position: sticky; top: 0; padding: 8px;} .header-spacer {display:none;} .header h1 {font-size: 1rem;} .header-btn {padding:6px;} .desk-grid {grid-template-columns:1fr;} }
         /* Keep touch-device editing at a readable size without disabling pinch zoom. */
         @media (pointer: coarse), (max-width: 600px) {
@@ -756,11 +763,11 @@
             }
         }, 15000);
     </script>
-    <script src="js/core.js?v=20260929-state-1"></script>
+    <script src="js/core.js?v=20261010-dialogue-1"></script>
     <script src="js/models.js?v=20260929-cache-1"></script>
     <script src="js/providers.js?v=20260929-cache-1"></script>
     <script src="js/store.js"></script>
-    <script src="js/ui.js?v=20260929-state-1"></script>
-    <script src="js/app.js?v=20260929-cache-1"></script>
+    <script src="js/ui.js?v=20261010-dialogue-1"></script>
+    <script src="js/app.js?v=20261010-dialogue-1"></script>
 </body>
 </html>

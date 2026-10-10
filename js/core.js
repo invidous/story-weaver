@@ -144,7 +144,37 @@ Do not invent prior hidden history to fill a field. New GM plans must be labeled
         const total=die+modifier,margin=total-dc;
         return {id:id(),intent,approach,stakes,skill,modifier,dc,die,total,margin,source:arguments[0].die===undefined?'app':'player',created:new Date().toISOString()};
     }
-    const api={clone,id,kinds,migrate,validateRecord,visibleText,splitReply,applyDelta,buildPrompt,stateContract,trimIndex,validateSummary,roll};
+    // Dialogue Engine lists (framework Amendment 2.11): numbered from 1, closed by a custom slot such as [Your own words].
+    const CUSTOM_OPTION=/^\[?\s*(?:your own words|say something else|something else|custom(?: reply| response)?)\s*(?:\.{3}|…)?\s*\]?$/i;
+    function dialogueOptions(text) {
+        const lines=String(text).trimEnd().split(/\r?\n/),item=/^\s*(?:\*\*)?(\d+)[.)](?:\*\*)?\s+(\S.*)$/,plain=s=>s.replace(/\*\*/g,'').trim();
+        let found=null;
+        for(let start=0;start<lines.length;start++) {
+            if(lines[start].match(item)?.[1]!=='1')continue;
+            const options=[];let end=start;
+            for(let i=start;i<lines.length;i++) {
+                const m=lines[i].match(item);
+                if(m&&Number(m[1])===options.length+1){options.push(m[2]);end=i;continue;}
+                if(!lines[i].trim())continue;
+                // Wrapped options continue on indented lines directly below them.
+                if(/^\s/.test(lines[i])&&i===end+1){options[options.length-1]+=' '+lines[i].trim();end=i;continue;}
+                break;
+            }
+            if(options.length>=2&&CUSTOM_OPTION.test(plain(options.at(-1))))found={start,end,options};
+            start=end;
+        }
+        if(!found)return null;
+        return {
+            before:lines.slice(0,found.start).join('\n').replace(/\n\s*[-—_=*]{3,}\s*$/,'').trimEnd(),
+            after:lines.slice(found.end+1).join('\n').trim(),
+            options:found.options.map((raw,i)=>{
+                const text=plain(raw),tags=[];let line=text,m;
+                while((m=line.match(/^\[([^\]]+)\]\s*/))){tags.push(m[1].trim());line=line.slice(m[0].length);}
+                return {number:i+1,text:(i+1)+'. '+text,tags,line,custom:i===found.options.length-1};
+            })
+        };
+    }
+    const api={clone,id,kinds,migrate,validateRecord,visibleText,splitReply,applyDelta,buildPrompt,stateContract,trimIndex,validateSummary,roll,dialogueOptions};
     root.NexusCore=api;
     if(typeof module!=='undefined') module.exports=api;
 })(globalThis);
