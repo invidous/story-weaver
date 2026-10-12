@@ -57,27 +57,36 @@
            typeof rec.text!=='string' || !['player','gm'].includes(rec.visibility) || !['fact','claim','belief','inference','unknown'].includes(rec.certainty) ||
            !Array.isArray(rec.source_turns) || !rec.source_turns.every(s=>typeof s==='string')) throw Error('Invalid continuity record.');
     }
+    // Models sometimes open a reply by echoing the [Turn id] labels the application adds to transcript messages.
+    function stripTurnLabels(text) { return text.replace(/^(?:[ \t]*\[Turn [^\]\r\n]{1,80}\][ \t]*(?:\r?\n|$))+/i,''); }
     function visibleText(text) {
-        const marker=stateMarker(text);
-        if(marker) return text.slice(0,marker.index).trimEnd();
+        const block=stateBlock(text);
+        if(block) return [block.before,visibleText(block.after)].map(s=>stripTurnLabels(s).trim()).filter(Boolean).join('\n\n');
         // Do not briefly expose a partial opening marker while streaming.
         const at=text.lastIndexOf('<');
         if(at>=0) {
             const suffix=text.slice(at).replace(/\s/g,'').toLowerCase();
-            if(['<nexus-state>','<!--nexus-state-->'].some(m=>m.startsWith(suffix))) return text.slice(0,at);
+            if(['<nexus-state>','<!--nexus-state-->'].some(m=>m.startsWith(suffix))) return stripTurnLabels(text.slice(0,at));
         }
-        return text;
+        return stripTurnLabels(text);
     }
     function stateMarker(text) {return /<nexus-state\s*>|<!--\s*nexus-state\s*-->/i.exec(text);}
-    function splitReply(text) {
+    function stateBlock(text) {
         const marker=stateMarker(text);
-        if(!marker) return {prose:visibleText(text).trim(),delta:null,warning:'No continuity update received; existing records retained.'};
-        const at=marker.index,start=at+marker[0].length;
+        if(!marker) return null;
+        const start=marker.index+marker[0].length;
         const closing=marker[0].startsWith('<!--')?/<!--\s*\/nexus-state\s*-->/i:/<\/nexus-state\s*>/i;
         const end=closing.exec(text.slice(start));
-        if(!end) return {prose:visibleText(text).trim(),delta:null,warning:'Incomplete continuity update; existing records retained.'};
-        try { return {prose:text.slice(0,at).trim(),delta:JSON.parse(text.slice(start,start+end.index)),warning:null}; }
-        catch { return {prose:text.slice(0,at).trim(),delta:null,warning:'Invalid continuity update; existing records retained.'}; }
+        // A block placed mid-reply is followed by narrative that must not be discarded; stray code fences around it are dropped.
+        return {before:text.slice(0,marker.index).replace(/```[a-z]*\s*$/i,''),json:end?text.slice(start,start+end.index):null,
+            after:end?text.slice(start+end.index+end[0].length).replace(/^\s*```/,''):''};
+    }
+    function splitReply(text) {
+        const block=stateBlock(text),prose=visibleText(text).trim();
+        if(!block) return {prose,delta:null,warning:'No continuity update received; existing records retained.'};
+        if(block.json===null) return {prose,delta:null,warning:'Incomplete continuity update; existing records retained.'};
+        try { return {prose,delta:JSON.parse(block.json),warning:null}; }
+        catch { return {prose,delta:null,warning:'Invalid continuity update; existing records retained.'}; }
     }
     function applyDelta(state, delta, turnId, knownTurns) {
         if(!object(delta) || !Array.isArray(delta.upserts) || !Array.isArray(delta.chronicle)) throw Error('Invalid continuity update shape.');
@@ -115,7 +124,7 @@
     function stateContract(turnId) {
         return `APPLICATION CONTINUITY CONTRACT v2
 Return normal narrative prose first. Then append exactly one <nexus-state>JSON</nexus-state> block. This block is GM bookkeeping, hidden from ordinary display. Current assistant turn ID: ${turnId}.
-Use the exact XML-style markers above, not HTML comments or Markdown fences. source_turns contains bare IDs, without the displayed "Turn " label.
+Use the exact XML-style markers above, not HTML comments or Markdown fences. source_turns contains bare IDs, without the displayed "Turn " label. Transcript messages carry [Turn ID] labels added by the application; never write such labels in your reply.
 JSON shape: {"upserts":[],"chronicle":[],"scene_end":false}.
 Each upsert: {"id":"stable_id","kind":"${kinds.join('|')}","text":"specific fact or explicitly labeled uncertainty","visibility":"player|gm","certainty":"fact|claim|belief|inference|unknown","source_turns":["source turn ID"]}. Choose a SINGLE value for each pipe-separated enum, never the entire list.
 Reuse existing IDs for changed records. Include only consequential new or changed records; retain all untouched records. Record PC skills/injuries, NPC agendas, promises, knowledge sources and holders, world clock, threads, faction clocks, mystery truths, canon divergences, motifs, planted guns, locations, and population checks when relevant.
@@ -174,7 +183,7 @@ Do not invent prior hidden history to fill a field. New GM plans must be labeled
             })
         };
     }
-    const api={clone,id,kinds,migrate,validateRecord,visibleText,splitReply,applyDelta,buildPrompt,stateContract,trimIndex,validateSummary,roll,dialogueOptions};
+    const api={clone,id,kinds,migrate,validateRecord,stripTurnLabels,visibleText,splitReply,applyDelta,buildPrompt,stateContract,trimIndex,validateSummary,roll,dialogueOptions};
     root.NexusCore=api;
     if(typeof module!=='undefined') module.exports=api;
 })(globalThis);
