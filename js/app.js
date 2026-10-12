@@ -60,7 +60,7 @@ async function sendMessage() {
                 (usage.cachedTokens===undefined?'cache reads not reported':usage.cachedTokens.toLocaleString()+' cached input tokens')+
                 (usage.cacheWriteTokens===undefined?'':' · '+usage.cacheWriteTokens.toLocaleString()+' tokens written to cache');},
             system:Core.buildPrompt(NEXUS_FRAMEWORK,pending,getProvider()==='google'?GEMINI_REINFORCEMENT:'',turnId),
-            messages:pending.messages.map(m=>({...m,content:'[Turn '+m.id+']\n'+m.content}))},text=>{
+            messages:pending.messages.map(m=>({...m,content:'[Turn '+m.id+']\n'+Core.stripTurnLabels(m.content)}))},text=>{
                 partial=Core.visibleText(text);$('stream-preview').textContent=partial||'The Nexus is thinking…';
             });
         const reply=Core.splitReply(full);if(!reply.prose)throw Error('No narrative text received.');
@@ -191,10 +191,12 @@ async function archiveAndTrim(){
         busy('archive',true);abortController=new AbortController();
         const before=snapshot();
         setStatus('Choose which completed turn to archive.');
-        let cut=Core.trimIndex(messages,campaign.campaign_state.scene_breaks);
+        // Without a recorded scene break, suggest the latest boundary that keeps ten messages active, not the oldest one.
+        const sceneCut=Core.trimIndex(messages,campaign.campaign_state.scene_breaks);
+        let cut=sceneCut??Core.trimIndex(messages,messages.filter(m=>m.role==='assistant'&&m.status!=='interrupted').map(m=>m.id));
         const choices=messages.map((m,i)=>({m,i})).filter(({m,i})=>m.role==='assistant'&&m.status!=='interrupted'&&i>=1&&i<messages.length-3&&messages[i+1].role==='user');
         if(!choices.length)throw Error('No complete turn boundary is available for archival.');
-        const selection=await reviewDialog('Choose the archive boundary','Messages through this response will be archived. The remaining conversation stays active. Choose a genuine scene boundary; cancel leaves everything unchanged.',choices.map(({m,i})=>({value:String(i+1),label:(i+1===cut?'Suggested · ':'')+'Through message '+(i+1)+': '+m.content.slice(0,85)})).sort((a,b)=>Number(b.value===String(cut))-Number(a.value===String(cut))));
+        const selection=await reviewDialog('Choose the archive boundary','Messages through this response will be archived. The remaining conversation stays active. Choose a genuine scene boundary; cancel leaves everything unchanged.',choices.map(({m,i})=>({value:String(i+1),label:(i+1===cut?(sceneCut?'Suggested · ':'Suggested (no scene break recorded) · '):'')+'Through message '+(i+1)+': '+Core.visibleText(m.content).slice(0,85)})).sort((a,b)=>Number(b.value===String(cut))-Number(a.value===String(cut))));
         if(selection===null){setStatus('Archive cancelled; transcript retained.');return;}cut=Number(selection);
         const quality=await reviewDialog('Summary quality','Review the proposed player-facing sheet before applying. Existing campaign ledgers and the original transcript are preserved.',[{value:'deep',label:'Deep — stronger continuity'},{value:'quick',label:'Quick — lower cost'}]);
         if(!quality||abortController.signal.aborted){setStatus('Archive cancelled; transcript retained.');return;}
