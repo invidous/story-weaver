@@ -24,6 +24,7 @@
     }
     function request({provider,model,key,temperature=1,system,messages,maxTokens=12288,stream=true,cachePrefix='',cacheTtl='1h'}, info={}) {
         if(cachePrefix && !system.startsWith(cachePrefix)) throw Error('Cache prefix must match the beginning of the system prompt.');
+        maxTokens=Math.max(maxTokens,info?.minOutputTokens||0);
         const cache=cachePrefix && cacheTtl!=='off';
         // Never forward local IDs, status, snapshots, or continuity metadata as API message properties.
         const conversation=messages.filter(m=>m.status!=='failed'&&m.status!=='interrupted'&&m.role!=='system').map(({role,content})=>({role,content}));
