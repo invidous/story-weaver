@@ -8,6 +8,8 @@ A browser-based AI Game Master for genre-flexible, consequence-driven adventures
 
 Prompt caching update (September 29, 2026): the stable framework now has an explicit cache boundary for Claude and supported newer OpenAI models. Gemini retains automatic caching. The composer shows provider-reported cache usage, and Settings offers Claude one-hour, five-minute, or Off options. The complete framework and fresh campaign state remain in every request. See [caching costs and upload instructions](docs/prompt-caching.md).
 
+Luna pacing calibration (October 19, 2026): an optional narration profile for sessions that stall on procedural micro-decisions. It resolves the player's stated intent, lets competent NPCs handle routine work, and pauses at meaningful player decisions. It never invents PC speech or actions, and combat threat pauses are unchanged. Turn it on with `Nexus, Luna calibration: on`; other models may use it too.
+
 ## Start playing
 
 1. Open the site and wait for **Nexus 3.6 ready**.
