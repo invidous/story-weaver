@@ -23,10 +23,10 @@ const MODEL_CATALOG = {
     ]},
     openai:{default:'gpt-6.1-sol',summary:{deep:'gpt-6.1-sol',quick:'gpt-6-luna'},models:[
         {id:'gpt-6.1-sol',label:'GPT-6.1 Sol — balanced ($2 in / $10 out per 1M)',sampling:false,reasoning:'low'},
-        {id:'gpt-6-luna',label:'GPT-6 Luna — budget ($0.10 in / $0.50 out per 1M)',sampling:false,reasoning:'low'},
+        {id:'gpt-6-luna',label:'GPT-6 Luna — budget ($0.10 in / $0.50 out per 1M)',sampling:false,reasoning:'low',calibration:'luna'},
         {id:'gpt-6-astra',label:'GPT-6 Astra — flagship, deep reasoning ($10 in / $50 out per 1M)',sampling:false,reasoning:'low'},
         {id:'gpt-5.6-sol',label:'GPT-5.6 Sol',sampling:false},
-        {id:'gpt-5.6-luna',label:'GPT-5.6 Luna — fast reasoning',sampling:false},
+        {id:'gpt-5.6-luna',label:'GPT-5.6 Luna — fast reasoning',sampling:false,calibration:'luna'},
         {id:'chat-latest',label:'Chat Latest — current ChatGPT Instant, rolling alias ($5 in / $30 out per 1M)',sampling:false},
         {id:'gpt-5.5',label:'GPT-5.5 — previous generation',sampling:false},
         {id:'gpt-5.4-mini',label:'GPT-5.4 Mini — economical',sampling:false}
@@ -42,6 +42,13 @@ function resolveModel(provider,saved=savedModel(provider)) {
     return MODEL_REPLACEMENTS[provider]?.[saved]||MODEL_CATALOG[provider].default;
 }
 function getModel() { return resolveModel(getProvider()); }
+// Sent with every narrative request so the framework's Luna-only calibration [LUNA-BEATS] follows the active model.
+function hostModelNote(provider,model) {
+    const info=modelInfo(provider,model),name=info?info.label.split(' — ')[0]:model;
+    return 'HOST MODEL CONTEXT\nActive model: '+model+' ('+name+'). '+(info?.calibration==='luna'
+        ?'The host identifies this model as Luna, so LUNA CALIBRATION [LUNA-BEATS], including 6A, applies unless the player has turned Luna calibration off.'
+        :'This model is not Luna, so LUNA CALIBRATION [LUNA-BEATS] does not apply, whatever earlier turns or preferences say; use the default pacing and prose rules.');
+}
 function renderModelOptions(provider) {
     const select=document.getElementById('model-select'); select.replaceChildren();
     for(const m of MODEL_CATALOG[provider].models) select.add(new Option(m.label,m.id));

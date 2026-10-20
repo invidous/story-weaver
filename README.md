@@ -10,6 +10,8 @@ Prompt caching update (September 29, 2026): the stable framework now has an expl
 
 Luna pacing calibration (October 19, 2026): an optional narration profile for sessions that stall on procedural micro-decisions. It resolves the player's stated intent, lets competent NPCs handle routine work, and pauses at meaningful player decisions. It never invents PC speech or actions, and combat threat pauses are unchanged. Turn it on with `Nexus, Luna calibration: on`; other models may use it too.
 
+Luna calibration update (October 20, 2026): the profile is now Luna-only. It applies automatically when GPT-6 Luna or GPT-5.6 Luna is selected and switches off for every other model, which keeps default pacing and prose. This replaces the earlier allowance for other models. On Luna, `Nexus, Luna calibration: off` opts out. It also adds narrative-depth guidance: substantive turns stage the result in its scene, successful checks yield usable understanding, and concurrent NPC activity keeps moving. There is no word-count minimum.
+
 ## Start playing
 
 1. Open the site and wait for **Nexus 3.6 ready**.

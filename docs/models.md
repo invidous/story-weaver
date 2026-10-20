@@ -22,6 +22,10 @@ Verification was static. Model pages, deprecation tables, and pricing were check
 
 Official sources: [Claude models](https://platform.claude.com/docs/en/models/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations), [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing), [Gemini models](https://ai.google.dev/gemini-api/docs/models), [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon), [Gemini migration notes](https://ai.google.dev/gemini-api/docs/latest-model), [Gemini deprecations](https://ai.google.dev/gemini-api/docs/deprecations), [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing), [OpenAI models](https://developers.openai.com/api/docs/models), [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra), [chat-latest](https://developers.openai.com/api/docs/models/chat-latest), [OpenAI deprecations](https://developers.openai.com/api/docs/deprecations).
 
+### Luna calibration routing (October 20, 2026)
+
+Catalog entries marked `calibration:'luna'` (`gpt-6-luna`, `gpt-5.6-luna`) receive the framework's Luna-only `[LUNA-BEATS]` profile. Every narrative request carries a HOST MODEL CONTEXT note naming the active model and whether the profile applies, so switching to any other model turns it off. Mark future Luna releases only after the provider names them Luna; never infer it from an alias such as `gpt-5.5`.
+
 ## September 29, 2026 refresh
 
 The current menu adds Claude Sonnet 5.5 (`claude-sonnet-5-5`), Claude Opus 5.5 (`claude-opus-5-5`), GPT-6.1 Sol (`gpt-6.1-sol`), GPT-6 Luna (`gpt-6-luna`), and the missing Gemini 3.6 Flash fallback. Gemini 3.8 Flash remains Google's current general text default. Gemini 2.5 entries are marked for existing users only, per Google's access notice. Older saved choices remain selectable; the update does not overwrite browser settings or keys.
