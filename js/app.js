@@ -59,7 +59,7 @@ async function sendMessage() {
             onUsage:usage=>{$('cache-status').textContent='Latest request ('+usage.model+'): '+
                 (usage.cachedTokens===undefined?'cache reads not reported':usage.cachedTokens.toLocaleString()+' cached input tokens')+
                 (usage.cacheWriteTokens===undefined?'':' · '+usage.cacheWriteTokens.toLocaleString()+' tokens written to cache');},
-            system:Core.buildPrompt(NEXUS_FRAMEWORK,pending,getProvider()==='google'?GEMINI_REINFORCEMENT:'',turnId),
+            system:Core.buildPrompt(NEXUS_FRAMEWORK,pending,[getProvider()==='google'?GEMINI_REINFORCEMENT:'',hostModelNote(getProvider(),getModel())].filter(Boolean).join('\n\n'),turnId),
             messages:pending.messages.map(m=>({...m,content:'[Turn '+m.id+']\n'+Core.stripTurnLabels(m.content)}))},text=>{
                 partial=Core.visibleText(text);$('stream-preview').textContent=partial||'The Nexus is thinking…';
             });
