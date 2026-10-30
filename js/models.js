@@ -1,13 +1,14 @@
-// Official model catalogs checked 2026-10-18. Account access is provider-specific.
+// Official model catalogs checked 2026-10-30. Account access is provider-specific.
 // Sources and compatibility decisions: docs/models.md. Credentials remain in existing browser settings.
 const MODEL_CATALOG = {
     anthropic:{default:'claude-sonnet-5-5',summary:{deep:'claude-opus-5-5',quick:'claude-haiku-5-5'},models:[
-        {id:'claude-sonnet-5-5',label:'Claude Sonnet 5.5 — balanced ($2 in / $10 out per 1M)',sampling:false},
-        {id:'claude-opus-5-5',label:'Claude Opus 5.5 — premium ($4 in / $20 out per 1M)',sampling:false},
-        {id:'claude-fable-5-1',label:'Claude Fable 5.1 — top tier ($10 in / $50 out per 1M)',sampling:false},
-        {id:'claude-haiku-5-5',label:'Claude Haiku 5.5 — fast ($0.10 in / $0.50 out per 1M; $0.50 / $2.50 above 100K-token prompts)',sampling:false},
-        {id:'claude-opus-5',label:'Claude Opus 5 — older selection',sampling:false},
-        {id:'claude-sonnet-5',label:'Claude Sonnet 5 — older selection',sampling:false},
+        // Claude 5.x thinking is on by default and counts toward max_tokens; their tokenizer averages ~2.5 characters per token.
+        {id:'claude-sonnet-5-5',label:'Claude Sonnet 5.5 — balanced ($2 in / $10 out per 1M)',sampling:false,minOutputTokens:32768,charsPerToken:2.5},
+        {id:'claude-opus-5-5',label:'Claude Opus 5.5 — premium ($4 in / $20 out per 1M)',sampling:false,minOutputTokens:32768,charsPerToken:2.5},
+        {id:'claude-fable-5-1',label:'Claude Fable 5.1 — top tier ($10 in / $50 out per 1M)',sampling:false,minOutputTokens:32768,charsPerToken:2.5},
+        {id:'claude-haiku-5-5',label:'Claude Haiku 5.5 — fast ($0.10 in / $0.50 out per 1M; $0.50 / $2.50 above 100K-token prompts)',sampling:false,minOutputTokens:32768,charsPerToken:2.5},
+        {id:'claude-opus-5',label:'Claude Opus 5 — older selection',sampling:false,minOutputTokens:32768,charsPerToken:2.5},
+        {id:'claude-sonnet-5',label:'Claude Sonnet 5 — older selection',sampling:false,minOutputTokens:32768,charsPerToken:2.5},
         {id:'claude-haiku-4-5-20251001',label:'Claude Haiku 4.5 — older selection',sampling:true}
     ]},
     google:{default:'gemini-3.8-flash',summary:{deep:'gemini-3.1-pro-preview',quick:'gemini-3.5-flash-lite'},models:[
@@ -23,6 +24,7 @@ const MODEL_CATALOG = {
     ]},
     openai:{default:'gpt-6.1-sol',summary:{deep:'gpt-6.1-sol',quick:'gpt-6-luna'},models:[
         {id:'gpt-6.1-sol',label:'GPT-6.1 Sol — balanced ($2 in / $10 out per 1M)',sampling:false,reasoning:'low'},
+        {id:'gpt-6.1-terra',label:'GPT-6.1 Terra — efficient ($1 in / $5 out per 1M below 272K-token prompts)',sampling:false,reasoning:'low'},
         {id:'gpt-6-luna',label:'GPT-6 Luna — budget ($0.10 in / $0.50 out per 1M)',sampling:false,reasoning:'low',calibration:'luna'},
         {id:'gpt-6-astra',label:'GPT-6 Astra — flagship, deep reasoning ($10 in / $50 out per 1M)',sampling:false,reasoning:'low'},
         {id:'gpt-5.6-sol',label:'GPT-5.6 Sol',sampling:false},
@@ -56,6 +58,6 @@ function renderModelOptions(provider) {
     select.value=resolveModel(provider,saved);
     document.getElementById('model-note').textContent=(replacement?'Your saved model '+saved+' is now served by '+replacement+', which is selected. Save to keep it. ':
         saved&&!modelInfo(provider,saved)?'Previous model is not in the current catalog. The displayed model will be used; choose another if preferred. ':'')+
-        'Catalog checked October 18, 2026. Saved choices are retained. Prices shown are standard uncached text rates, before reasoning tokens or long-context premiums. Availability depends on your API account.';
+        'Catalog checked October 30, 2026. Saved choices are retained. Prices shown are standard uncached text rates, before reasoning tokens or long-context premiums. Availability depends on your API account.';
 }
 if(typeof module!=='undefined') module.exports=MODEL_CATALOG;

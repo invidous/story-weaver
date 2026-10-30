@@ -1,5 +1,21 @@
 # Model catalog policy
 
+## October 30, 2026 refresh
+
+Checked against official provider documentation on October 30, 2026. Defaults, saved selections, and the Luna-only calibration are unchanged.
+
+| Change | Old | New | Reason |
+| --- | --- | --- | --- |
+| Added | — | `gpt-6.1-terra` | Listed with the GPT-6 lineup. $1 / $5 per 1M; prompts over 272K input tokens cost 2x input and 1.5x output. Chat Completions supported; sent with `low` reasoning like the other GPT-6 entries, without `temperature`. Not a Luna model. |
+| Output floor | 12,288 (8,192 for archives) | at least 32,768 for Claude 5.x | Thinking is on by default and counts toward `max_tokens`. Anthropic says to leave room for thinking plus the reply, and to set a large limit at the `high` default used by Sonnet 5.5 and Fable 5.1. The floor is a ceiling, not a target length; billing is for tokens produced. |
+| Token estimate | ~4 characters per token for every model | ~2.5 for Claude 5.x | Anthropic documents about 2.5M characters per 1M tokens on the current tokenizer, so the Desk estimate was low by roughly 60% for these models. Other models keep the rough 4-character estimate, which no provider documents. The estimate now names the model and updates when Settings changes it. |
+
+Re-verified with no change needed: every existing OpenAI entry, including `chat-latest`, is listed without a deprecated badge. The Gemini 3.7/3.5 Flash routing, the Gemini 3.1 Flash-Lite date, Argon's handling (no `temperature`, no explicit cache, 32,768 output floor within its 65,536 synchronous default), and the Claude lifecycle all match the October 18 notes. The app sends no Gemini thinking level, so 3.8 Flash's unsupported `minimal` setting cannot be sent. It also stays on Anthropic API version `2023-06-01`, and sends `temperature` only to Haiku 4.5, which accepts it there; the slider's 1.0 maximum is within that model's range.
+
+Verification was static, with mocked providers. No live calls were made, so account access is not confirmed.
+
+Sources: [OpenAI models](https://developers.openai.com/api/docs/models), [OpenAI all models](https://developers.openai.com/api/docs/models/all), [GPT-6.1 Terra](https://developers.openai.com/api/docs/models/gpt-6.1-terra), [Claude models](https://platform.claude.com/docs/en/models/overview), [Claude effort and max_tokens](https://platform.claude.com/docs/en/build-with-claude/effort), [Claude deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations), [Gemini models](https://ai.google.dev/gemini-api/docs/models), [Gemini deprecations](https://ai.google.dev/gemini-api/docs/deprecations).
+
 ## October 18, 2026 refresh
 
 Checked against official provider documentation on October 18, 2026. Defaults are unchanged: Sonnet 5.5, Gemini 3.8 Flash, and GPT-6.1 Sol. Saved choices that remain in the catalog are kept as they are.

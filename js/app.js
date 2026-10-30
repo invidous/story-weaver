@@ -274,7 +274,8 @@ function showDesk(){
 function updateDeskStatus(){
     if(!$('context-status'))return;
     const chars=(NEXUS_FRAMEWORK?.length||0)+characterSheet.length+JSON.stringify(campaign.campaign_state).length+referenceDocuments.reduce((s,d)=>s+d.content.length,0)+messages.reduce((s,m)=>s+m.content.length,0);
-    $('context-status').textContent='Input estimate ~'+Math.ceil(chars/4).toLocaleString()+' tokens (rough) · '+messages.length+' messages'+(messages.length>=60?' · consider Archive & Trim':'');
+    const model=getModel(),perToken=modelInfo(getProvider(),model)?.charsPerToken||4;
+    $('context-status').textContent='Input estimate ~'+Math.ceil(chars/perToken).toLocaleString()+' tokens for '+model+' (rough) · '+messages.length+' messages'+(messages.length>=60?' · consider Archive & Trim':'');
 }
 const input=$('message-input');
 input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}});
