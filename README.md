@@ -12,6 +12,8 @@ Luna pacing calibration (October 19, 2026): an optional narration profile for se
 
 Luna calibration update (October 20, 2026): the profile is now Luna-only. It applies automatically when GPT-6 Luna or GPT-5.6 Luna is selected and switches off for every other model, which keeps default pacing and prose. This replaces the earlier allowance for other models. On Luna, `Nexus, Luna calibration: off` opts out. It also adds narrative-depth guidance: substantive turns stage the result in its scene, successful checks yield usable understanding, and concurrent NPC activity keeps moving. There is no word-count minimum.
 
+Meaningful-beats calibration (November 7, 2026): the Luna profile is now named the meaningful-beats calibration and also applies to GPT-6.1 Sol, without Luna's narrative-depth section. It adds GM ownership of the world. Facts that belong to the world are established rather than asked of the player. NPCs pursue their agendas within scenes. A clear intention such as "question the assessment" is carried out without asking for exact wording. Settled questions are not re-litigated. Player control of the PC is unchanged. Other models keep default pacing. `Nexus, beats calibration: off` opts out on a calibrated model; the old Luna command still works.
+
 ## Start playing
 
 1. Open the site and wait for **Nexus 3.6 ready**.

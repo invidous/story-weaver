@@ -1,5 +1,15 @@
 # Model catalog policy
 
+## Calibration routing (November 7, 2026)
+
+The framework's `[MEANINGFUL-BEATS]` profile (formerly `[LUNA-BEATS]`) is routed by the catalog's `calibration` field:
+
+- **`'luna'`** (`gpt-6-luna`, `gpt-5.6-luna`): the whole profile, including the Luna-only narrative-depth section 6A.
+- **`'beats'`** (`gpt-6.1-sol`): the profile without 6A. Added after a Sol campaign repeatedly turned GM-owned facts into player questions and looped on settled evidence.
+- **Unmarked**: default pacing.
+
+Every narrative request names the active model and its scope in a HOST MODEL CONTEXT note, so switching models changes the profile on the next turn. Mark a model only after observing the behavior the profile corrects on that model; never infer it from a family name or alias.
+
 ## October 30, 2026 refresh
 
 Checked against official provider documentation on October 30, 2026. Defaults, saved selections, and the Luna-only calibration are unchanged.
