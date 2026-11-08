@@ -1,5 +1,5 @@
 GENRE-FLEXIBLE IMMERSIVE RPG FRAMEWORK
-Version 3.6 — Continuity Edition
+Version 3.7 — Dialogue Edition
 Build Date: 2026-09-06
 Storytelling revision: Character and Physical Presence, 2026-09-06
 Dynamic World States, Narrative Architecture & Prose Calibration Engine
@@ -62,7 +62,7 @@ SESSION FLOW (STRICT ORDER)
 
    TIER 1 — ORIGIN (Default)
    "A nobody with potential. You start at the bottom and earn everything."
-   Skill Budget: 15 points | Range per skill: -2 to +5
+   Skill Budget: 39 points | Range per skill: -2 to +5
    Entry: ORIGIN ARC (Steps 6a-6d below)
    Best for: Coming-of-age stories, zero-to-hero arcs, earning your place.
    Examples: Farm boy, street kid, raw recruit, untrained Force-sensitive,
@@ -70,7 +70,7 @@ SESSION FLOW (STRICT ORDER)
 
    TIER 2 — JOURNEYMAN
    "Competent and tested. You've survived your first chapter."
-   Skill Budget: 27 points | Range per skill: -2 to +7
+   Skill Budget: 70 points | Range per skill: -2 to +7
    Entry: ORIGIN ARC or COLD OPEN (player's choice)
    Best for: Mid-career characters, established professionals, characters
    with history.
@@ -79,7 +79,7 @@ SESSION FLOW (STRICT ORDER)
 
    TIER 3 — VETERAN
    "Dangerous and known. The world reacts to your reputation."
-   Skill Budget: 36 points | Range per skill: -2 to +9
+   Skill Budget: 94 points | Range per skill: -2 to +9
    Entry: COLD OPEN (mandatory — veterans don't need tutorials)
    Best for: Experienced characters, experts, characters whose backstory IS
    the story.
@@ -88,7 +88,7 @@ SESSION FLOW (STRICT ORDER)
 
    TIER 4 — LEGEND
    "A force of nature. History remembers — or fears — your name."
-   Skill Budget: 45 points | Range per skill: -2 to +9 (minimum +3 in one skill)
+   Skill Budget: 117 points | Range per skill: -2 to +9 (minimum +3 in one skill)
    Entry: COLD OPEN (mandatory) with LEGACY COMPLICATION
    Best for: End-game characters, mythic figures, "what comes after saving
    the world."
@@ -101,7 +101,8 @@ SESSION FLOW (STRICT ORDER)
    - A promise that conflicts with your survival
    - A reputation that precedes you (for better and worse)
 
-   Skills (Assigned within tier budget and range):
+   Skills (each subskill scored separately within the tier budget and range;
+   budgets assume 13 scored skills — see SKILL ONTOLOGY):
    - Physical (Strength, Agility, Endurance)
    - Mental (Analysis, Knowledge, Technical)
    - Social (Persuasion, Deception, Intimidation)
@@ -2700,7 +2701,7 @@ closes that gap without creating a parallel system: it sideloads into the
 existing Prose Density Profile, Threat Vector Pause, Contrast Pulse, and World
 Evolution Roll mechanics.
 
-PASSIVE TEXTURE BASELINE (v3.6):
+PASSIVE TEXTURE BASELINE (v3.7):
 The roll-based trigger system below generates specific incidents. But ambient
 texture is not only incidents — it is the standing population activity that
 makes a place feel inhabited. Every scene description in an occupied location
@@ -2824,7 +2825,7 @@ enough to expect.
 | DYING       | Occasional    | Woven        | Occasional     | Woven         | Occasional      |
 | MYTHIC      | Occasional    | Occasional   | Occasional     | Occasional    | Woven           |
 
-Notes on the table (v3.6 revision — density shifted upward for lived-in
+Notes on the table (v3.7 revision — density shifted upward for lived-in
 world states; the previous defaults suppressed background texture):
 - UTOPIAN: Crime/Danger and Poverty/Decay are ABSENT but hidden/concealed —
   their suppression IS the texture.
@@ -4021,6 +4022,14 @@ Physical, Mental, Social, Survival, and Specialist are CATEGORIES, each
 containing separately scored subskills. The tier skill budgets distribute
 points across individual subskills, not across the five categories.
 
+TIER BUDGETS (v3.7 correction): Budgets are sized for 13 scored skills, the
+12 core subskills plus one Specialist ability. That keeps each tier at the
+average skill level v3.1-v3.4 gave its five categories: about +3 at Tier 1,
++5 at Tier 2, +7 at Tier 3, and +9 at Tier 4 (39 / 70 / 94 / 117 points).
+A category-wide score is bought by setting each of its subskills to it, so
+a Tier 4 Legend may hold every core subskill and one Specialist ability at
++9. Additional Specialist abilities draw on the same budget.
+
 Subskills (each scored individually within tier budget and range):
 - Physical: Strength, Agility, Endurance
 - Mental: Analysis, Knowledge, Technical
@@ -4317,7 +4326,7 @@ within its application (FACET ADVANTAGE, below). This defines Tier 4's "new
 uses of a skill" and gives a Tier 3 character who starts a skill at +9 a
 live growth path from session one.
 
-FACET ADVANTAGE [MECH-FACET] (v3.6 — mastery made mechanical):
+FACET ADVANTAGE [MECH-FACET] (v3.7 — mastery made mechanical):
 A Facet marks the point where a skill stops being merely high and becomes
 masterful. When a held Facet squarely covers the check at hand, the PC rolls
 with ADVANTAGE: roll 2d20, keep the higher die, then add the skill modifier
@@ -4754,7 +4763,7 @@ QUICK REFERENCE
 ================================================================================
 
 ================================================================================
-ACTIVATION MAP (v3.6 — authoritative cadence routing)
+ACTIVATION MAP (v3.7 — authoritative cadence routing)
 ================================================================================
 
 Generated from rules/cadence.json. This routes checks; it does not remove
