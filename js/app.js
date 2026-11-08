@@ -302,7 +302,8 @@ async function init(){
         $('save-status').textContent=data?'Browser recovery ready — saved campaign restored.':'Browser recovery ready — no saved campaign yet.';
         window.nexusStartupComplete=true;
         const mismatch=campaign.framework?.sha256&&frameworkMeta.sha256&&campaign.framework.sha256!==frameworkMeta.sha256;
-        setStatus(failures.length?'Some legacy sessions could not be imported; original browser saves retained.':mismatch?'Framework updated since this campaign was saved; prior version is recorded in its export.':interrupted?'Recovered an interrupted turn. Retry its action when ready.':'Nexus 3.6 ready. Existing provider keys retained.',failures.length?'error':'success');
+        const frameworkRelease=frameworkMeta.version.match(/^[\d.]+/)?.[0];
+        setStatus(failures.length?'Some legacy sessions could not be imported; original browser saves retained.':mismatch?'Framework updated since this campaign was saved; prior version is recorded in its export.':interrupted?'Recovered an interrupted turn. Retry its action when ready.':'Nexus'+(frameworkRelease?' '+frameworkRelease:'')+' ready. Existing provider keys retained.',failures.length?'error':'success');
     }catch(e){window.nexusStartupComplete=true;setStatus(e.message,'error');$('save-status').textContent='Startup incomplete — reload after resolving the error';}
 }
 init();

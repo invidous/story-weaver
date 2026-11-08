@@ -1,6 +1,6 @@
 # The Nexus
 
-**Version 3.6 — Continuity Edition**
+**Version 3.7 — Dialogue Edition**
 
 A browser-based AI Game Master for genre-flexible, consequence-driven adventures with Claude, OpenAI, and Gemini.
 
@@ -16,13 +16,28 @@ Meaningful-beats calibration (November 7, 2026): the Luna profile is now named t
 
 ## Start playing
 
-1. Open the site and wait for **Nexus 3.6 ready**.
+1. Open the site and wait for **Nexus 3.7 ready**.
 2. Open **Settings**, choose a provider and model, and enter that provider's API key.
 3. Type **Begin**, or open **Sessions** to import a campaign.
 
 Provider API access and billing are separate from consumer chat subscriptions. Model availability depends on your provider account; see the [catalog notes](docs/models.md).
 
 Keys remain in browser local storage and are sent to the selected provider for requests. Campaign exports exclude keys. Campaigns and drafts save in IndexedDB, without automatic synchronization between devices, browsers, or site addresses. Use **Download** for portable backups before clearing browser data.
+
+## Framework source of truth
+
+`framework.txt` in this repository is the authoritative framework. Its first line names the release. Campaign exports also record the framework's SHA-256, which identifies the exact text a campaign was played under. To use the framework elsewhere, such as a ChatGPT project, replace that copy with [the current file](https://raw.githubusercontent.com/invidous/story-weaver/main/framework.txt) after each update instead of editing it separately.
+
+## What's new in 3.7
+
+- **Skill budgets fit subskill scoring:** 39 / 70 / 94 / 117 points by tier, sized for 13 scored skills. Each tier keeps its intended average (+3 / +5 / +7 / +9), and a Tier 4 Legend can hold every core subskill at +9. Version 3.5 scored subskills individually but kept budgets sized for five categories.
+- **Dialogue Engine:** optional numbered replies at conversational turning points, with class or origin lines and an always-present custom slot. They appear as clickable buttons. Enable with `Nexus, dialogue options: key moments`.
+- **Facet Advantage:** a held Facet that covers a check grants 2d20, keep the higher.
+- **Meaningful-beats calibration** for GPT-6 Luna, GPT-5.6 Luna, and GPT-6.1 Sol. Stops land at meaningful decisions, the GM establishes world facts, and NPCs act on their own agendas. Other models keep default pacing.
+- **Richer ambient incidents:** background crime, vice, disorder, and community life without player prompting.
+- **Archive & Trim fixes:** a useful default cut when no scene break is recorded. Narrative placed after a continuity block is kept, and echoed turn labels are hidden.
+- **Model catalog refreshes:** Claude Haiku 5.5, Gemini 4 Argon, and GPT-6.1 Terra. Thinking models get room in their output limit, and the Desk token estimate follows the selected model.
+- The ready message reads the release from `framework.txt`.
 
 ## What's new in 3.6
 
