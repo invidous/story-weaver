@@ -23,7 +23,7 @@ const MODEL_CATALOG = {
         {id:'gemini-2.5-flash',label:'Gemini 2.5 Flash — existing users only',sampling:true}
     ]},
     openai:{default:'gpt-6.1-sol',summary:{deep:'gpt-6.1-sol',quick:'gpt-6-luna'},models:[
-        {id:'gpt-6.1-sol',label:'GPT-6.1 Sol — balanced ($2 in / $10 out per 1M)',sampling:false,reasoning:'low',calibration:'beats'},
+        {id:'gpt-6.1-sol',label:'GPT-6.1 Sol — balanced ($2 in / $10 out per 1M)',sampling:false,reasoning:'low'},
         {id:'gpt-6.1-terra',label:'GPT-6.1 Terra — efficient ($1 in / $5 out per 1M below 272K-token prompts)',sampling:false,reasoning:'low'},
         {id:'gpt-6-luna',label:'GPT-6 Luna — budget ($0.10 in / $0.50 out per 1M)',sampling:false,reasoning:'low',calibration:'luna'},
         {id:'gpt-6-astra',label:'GPT-6 Astra — flagship, deep reasoning ($10 in / $50 out per 1M)',sampling:false,reasoning:'low'},
@@ -44,14 +44,12 @@ function resolveModel(provider,saved=savedModel(provider)) {
     return MODEL_REPLACEMENTS[provider]?.[saved]||MODEL_CATALOG[provider].default;
 }
 function getModel() { return resolveModel(getProvider()); }
-// Sent with every narrative request so the framework's [MEANINGFUL-BEATS] calibration follows the active model.
-// 'luna' gets the whole profile including 6A; 'beats' gets it without 6A; unmarked models keep the defaults.
+// Sent with every narrative request. Meaningful-beats pacing applies to every model; only its 6A section is model-specific.
 function hostModelNote(provider,model) {
     const info=modelInfo(provider,model),name=info?info.label.split(' — ')[0]:model;
-    const scope={luna:'including 6A',beats:'except 6A, which is Luna only'}[info?.calibration];
-    return 'HOST MODEL CONTEXT\nActive model: '+model+' ('+name+'). '+(scope
-        ?'The host marks this model as calibrated, so MEANINGFUL BEATS CALIBRATION [MEANINGFUL-BEATS] applies, '+scope+', unless the player has turned beats calibration off.'
-        :'This model is not calibrated, so MEANINGFUL BEATS CALIBRATION [MEANINGFUL-BEATS] does not apply, whatever earlier turns or preferences say; use the default pacing and prose rules.');
+    return 'HOST MODEL CONTEXT\nActive model: '+model+' ('+name+'). '+(info?.calibration==='luna'
+        ?'Section 6A of PACING AND PLAYER AGENCY: MEANINGFUL BEATS applies to this model.'
+        :'Section 6A of PACING AND PLAYER AGENCY: MEANINGFUL BEATS (Luna only) does not apply to this model, whatever earlier turns say.');
 }
 function renderModelOptions(provider) {
     const select=document.getElementById('model-select'); select.replaceChildren();
