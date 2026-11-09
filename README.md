@@ -14,6 +14,8 @@ Luna calibration update (October 20, 2026): the profile is now Luna-only. It app
 
 Meaningful-beats calibration (November 7, 2026): the Luna profile is now named the meaningful-beats calibration and also applies to GPT-6.1 Sol, without Luna's narrative-depth section. It adds GM ownership of the world. Facts that belong to the world are established rather than asked of the player. NPCs pursue their agendas within scenes. A clear intention such as "question the assessment" is carried out without asking for exact wording. Settled questions are not re-litigated. Player control of the PC is unchanged. Other models keep default pacing. `Nexus, beats calibration: off` opts out on a calibrated model; the old Luna command still works.
 
+Pacing consolidation (November 9, 2026): meaningful-beats pacing is now the default for every model. The separate stop-after-everything rules are removed. The GM carries out the player's stated intent, including ordinary staging, lets NPCs act and settle their own matters, and pauses at real decisions with at most one question to the PC. Player control of the PC is unchanged. Luna models additionally get the narrative-depth section 6A. Ask for finer, step-by-step pacing at any time.
+
 ## Start playing
 
 1. Open the site and wait for **Nexus 3.7 ready**.
@@ -33,7 +35,7 @@ Keys remain in browser local storage and are sent to the selected provider for r
 - **Skill budgets fit subskill scoring:** 39 / 70 / 94 / 117 points by tier, sized for 13 scored skills. Each tier keeps its intended average (+3 / +5 / +7 / +9), and a Tier 4 Legend can hold every core subskill at +9. Version 3.5 scored subskills individually but kept budgets sized for five categories.
 - **Dialogue Engine:** optional numbered replies at conversational turning points, with class or origin lines and an always-present custom slot. They appear as clickable buttons. Enable with `Nexus, dialogue options: key moments`.
 - **Facet Advantage:** a held Facet that covers a check grants 2d20, keep the higher.
-- **Meaningful-beats calibration** for GPT-6 Luna, GPT-5.6 Luna, and GPT-6.1 Sol. Stops land at meaningful decisions, the GM establishes world facts, and NPCs act on their own agendas. Other models keep default pacing.
+- **Meaningful-beats pacing** for every model. Stops land at meaningful decisions, the GM establishes world facts, and NPCs act on their own agendas. Luna models also get narrative-depth guidance (6A).
 - **Richer ambient incidents:** background crime, vice, disorder, and community life without player prompting.
 - **Archive & Trim fixes:** a useful default cut when no scene break is recorded. Narrative placed after a continuity block is kept, and echoed turn labels are hidden.
 - **Model catalog refreshes:** Claude Haiku 5.5, Gemini 4 Argon, and GPT-6.1 Terra. Thinking models get room in their output limit, and the Desk token estimate follows the selected model.

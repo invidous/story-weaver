@@ -1,5 +1,9 @@
 # Model catalog policy
 
+## Calibration routing (November 9, 2026)
+
+Meaningful-beats pacing is now the framework default for every model, so `gpt-6.1-sol` no longer needs the `'beats'` flag. Only `calibration:'luna'` (`gpt-6-luna`, `gpt-5.6-luna`) remains. It enables the Luna-only narrative-depth section 6A through the HOST MODEL CONTEXT note.
+
 ## Calibration routing (November 7, 2026)
 
 The framework's `[MEANINGFUL-BEATS]` profile (formerly `[LUNA-BEATS]`) is routed by the catalog's `calibration` field:
