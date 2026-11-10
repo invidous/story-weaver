@@ -1,5 +1,9 @@
 # Model catalog policy
 
+## GPT-6.1 Sol reasoning (November 10, 2026)
+
+`gpt-6.1-sol` now sends `reasoning_effort: medium` instead of `low`, as a single-variable test. Sol campaigns kept narration procedurally safe even after the pacing consolidation, and low effort on a roughly 70K-token rulebook may favor its most cautious rules. Reasoning tokens count toward `max_completion_tokens`, so Sol gets a 32,768-token output floor, like Claude 5.x. That is a ceiling, not a target length. Expect higher per-turn cost from the extra reasoning tokens (output rate, $10 per 1M). This applies to Sol's archive summaries too. Revert to `low` if the play comparison shows no gain.
+
 ## Calibration routing (November 9, 2026)
 
 Meaningful-beats pacing is now the framework default for every model, so `gpt-6.1-sol` no longer needs the `'beats'` flag. Only `calibration:'luna'` (`gpt-6-luna`, `gpt-5.6-luna`) remains. It enables the Luna-only narrative-depth section 6A through the HOST MODEL CONTEXT note.
