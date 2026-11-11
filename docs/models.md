@@ -1,5 +1,9 @@
 # Model catalog policy
 
+## Narrator voice routing (November 11, 2026)
+
+Catalog entries marked `calibration:'develop'` (`gpt-6.1-sol`, `gpt-6-luna`, `gpt-5.6-luna`) get section 6A and a short voice exemplar (`VOICE_EXEMPLAR` in `js/models.js`, about 270 words) in the HOST MODEL CONTEXT note at the end of each request. The exemplar is uncached and adds roughly 350 tokens per turn. It is campaign-neutral on purpose, and must stay free of the framework's banned vocabulary. Mark a model only after observing flat, procedural narration from it. Claude and Gemini are unmarked: Gemini already writes with a strong voice, and 6A's development guidance would add length to a model that over-narrates.
+
 ## GPT-6.1 Sol reasoning (November 10, 2026)
 
 `gpt-6.1-sol` now sends `reasoning_effort: medium` instead of `low`, as a single-variable test. Sol campaigns kept narration procedurally safe even after the pacing consolidation, and low effort on a roughly 70K-token rulebook may favor its most cautious rules. Reasoning tokens count toward `max_completion_tokens`, so Sol gets a 32,768-token output floor, like Claude 5.x. That is a ceiling, not a target length. Expect higher per-turn cost from the extra reasoning tokens (output rate, $10 per 1M). This applies to Sol's archive summaries too. Revert to `low` if the play comparison shows no gain.
