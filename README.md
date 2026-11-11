@@ -16,6 +16,8 @@ Meaningful-beats calibration (November 7, 2026): the Luna profile is now named t
 
 Pacing consolidation (November 9, 2026): meaningful-beats pacing is now the default for every model. The separate stop-after-everything rules are removed. The GM carries out the player's stated intent, including ordinary staging, lets NPCs act and settle their own matters, and pauses at real decisions with at most one question to the PC. Player control of the PC is unchanged. Luna models additionally get the narrative-depth section 6A. Ask for finer, step-by-step pacing at any time.
 
+Narrator voice and development (November 11, 2026): the framework now licenses an authorial narrator who interprets and judges the world, its institutions and its NPCs, but never the PC's quality, thoughts, or feelings. Prose preferences yield only in a real conflict with a higher rule, instead of being the default thing to give up. The Stover-class style anchor is now a decomposed technique profile, and models no longer announce that an author cannot be reproduced. Dialogue options get a self-check so one always declines, deflects, or withholds. GPT-6.1 Sol now gets the narrative-depth section 6A alongside the Luna models, plus a short campaign-neutral voice sample at the end of its request. Other models are unchanged.
+
 ## Start playing
 
 1. Open the site and wait for **Nexus 3.7 ready**.
